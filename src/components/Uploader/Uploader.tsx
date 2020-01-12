@@ -2,7 +2,7 @@ import React, { useEffect, ReactElement } from 'react'
 import useFirebaseUpload from './useFirebaseUpload'
 import { IonProgressBar } from '@ionic/react'
 
-const Uploader: React.FC = (props: any): ReactElement => {
+const Uploader: any = (props: { dir: string; proc: any }): ReactElement => {
   const [
     { data, isLoading, isError, progress },
     setDirName,

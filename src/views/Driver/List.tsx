@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import ReactDOM from 'react-dom'
-// @material-ui/core components
-import { makeStyles } from '@material-ui/core/styles'
-// core components
-import GridItem from 'components/Grid/GridItem'
-import GridContainer from 'components/Grid/GridContainer'
+import { createStyles } from '@material-ui/core'
+import withStyles from '@material-ui/core/styles/withStyles'
 
-import Card from 'components/Card/Card'
-import CardHeader from 'components/Card/CardHeader'
-import CardBody from 'components/Card/CardBody'
+import GridItem from '../../components/Grid/GridItem'
+import GridContainer from '../../components/Grid/GridContainer'
+
+import Card from '../../components/Card/Card'
+import CardHeader from '../../components/Card/CardHeader'
+import CardBody from '../../components/Card/CardBody'
 
 import firebase from '../../firebase'
 import Table from './Table'
@@ -18,9 +17,10 @@ import EditForm from './EditForm'
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import usePagination from 'firestore-pagination-hook'
-import LoadButton from 'components/ActionButton/LoadButton'
+import LoadButton from '../../components/ActionButton/LoadButton'
+import { Driver } from '../../types'
 
-const styles = {
+const styles = createStyles({
   cardCategoryWhite: {
     '&,& a,& a:hover,& a:focus': {
       color: 'rgba(255,255,255,.62)',
@@ -37,7 +37,7 @@ const styles = {
     color: '#FFFFFF',
     marginTop: '0px',
     minHeight: 'auto',
-    fontWeight: '300',
+    // fontWeight: '300',
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
     marginBottom: '3px',
     textDecoration: 'none',
@@ -48,26 +48,25 @@ const styles = {
       lineHeight: '1',
     },
   },
-}
+})
 
-const useStyles = makeStyles(styles)
-
-export default function DriverList() {
+function Page(props: any) {
   const db = firebase.firestore()
   const datastore = db.collection('drivers')
 
-  const classes = useStyles()
-  const [list, setList] = useState([])
+  // const classes = useStyles()
+  const { classes } = props
+  const [list, setList] = useState<Driver[]>([])
 
-  const addDoc = doc => {
+  const addDoc = (doc: any): void => {
     setList([...list, doc])
     doc.createdAt = firebase.firestore.FieldValue.serverTimestamp()
     doc.updatedAt = firebase.firestore.FieldValue.serverTimestamp()
     datastore.add(doc)
   }
 
-  const deleteDoc = id => {
-    setList(list.filter(doc => doc.id !== id))
+  const deleteDoc = (id: string): void => {
+    setList(list.filter((doc: any) => doc.id !== id))
     datastore.doc(id).delete()
   }
 
@@ -83,9 +82,9 @@ export default function DriverList() {
     createdAt: null,
     updatedAt: null,
   }
-  const [currentDoc, setCurrentDoc] = useState(initialFormState)
+  const [currentDoc, setCurrentDoc] = useState<Driver>(initialFormState)
 
-  const editDoc = doc => {
+  const editDoc = (doc: any): void => {
     setEditing(true)
     setCurrentDoc({
       id: doc.id,
@@ -99,7 +98,7 @@ export default function DriverList() {
     })
   }
 
-  const updateDoc = updatedDoc => {
+  const updateDoc = (updatedDoc: any): void => {
     setEditing(false)
     setList(list.map(doc => (doc.id === updatedDoc.id ? updatedDoc : doc)))
 
@@ -108,7 +107,7 @@ export default function DriverList() {
   }
 
   const [stateFilter, setStateFilter] = useState(-1)
-  const handleStateFilterChange = e => {
+  const handleStateFilterChange = (e: any): void => {
     setStateFilter(e.target.value)
   }
 
@@ -195,3 +194,5 @@ export default function DriverList() {
     </GridContainer>
   )
 }
+
+export default withStyles(styles)(Page)

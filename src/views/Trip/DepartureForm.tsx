@@ -6,12 +6,12 @@ import Map from '../Maps/Map'
 import DateFnsUtils from '@date-io/date-fns'
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 
-import GridItem from 'components/Grid/GridItem'
-import GridContainer from 'components/Grid/GridContainer'
+import GridItem from '../../components/Grid/GridItem'
+import GridContainer from '../../components/Grid/GridContainer'
 
-import PrevButton from 'components/ActionButton/PrevButton'
-import NextButton from 'components/ActionButton/NextButton'
-import { usePosition } from 'use-position'
+import PrevButton from '../../components/ActionButton/PrevButton'
+import NextButton from '../../components/ActionButton/NextButton'
+// import { usePosition } from 'use-position'
 
 const DepartureForm = ({
   setForm,
@@ -19,15 +19,18 @@ const DepartureForm = ({
   formData,
   navigation,
   google,
-}) => {
+}: any) => {
   const settings = useMemo(() => {
     return { enableHighAccuracy: true }
   }, [])
 
-  let { latitude, longitude, timestamp, accuracy, error } = usePosition(
-    true,
-    settings,
-  )
+  // let { latitude, longitude, timestamp, accuracy, error } = usePosition(
+  //   true,
+  //   settings,
+  // )
+
+  let latitude = undefined
+  let longitude = undefined
 
   console.log('1111111111111', latitude, longitude)
   console.log('2222222222222', latitude, longitude)
@@ -46,20 +49,20 @@ const DepartureForm = ({
 
   const [selectedDate, handleDateChange] = useState(departureAddress)
 
-  const proc = (address, lat, lng) => {
-    document.getElementsByName('departureAddress')[0].value = address
-    document.getElementsByName('departureLatitude')[0].value = lat
-    document.getElementsByName('departureLongitude')[0].value = lng
+  const proc = (address: any, lat: any, lng: any) => {
+    // document.getElementsByName('departureAddress')[0].value = address
+    // document.getElementsByName('departureLatitude')[0].value = lat
+    // document.getElementsByName('departureLongitude')[0].value = lng
 
     triggerSetForm('departureAddress', address)
     triggerSetForm('departureLatitude', lat)
     triggerSetForm('departureLongitude', lng)
   }
 
-  const changeDate = newDate => {
+  const changeDate = (newDate: any) => {
     handleDateChange(newDate)
     setTimeout(() => {
-      document.getElementsByName('departureDatetime')[0].value = newDate
+      // document.getElementsByName('departureDatetime')[0].value = newDate
       triggerSetForm('departureDatetime', newDate)
     }, 100)
   }
@@ -107,16 +110,18 @@ const DepartureForm = ({
       </GridContainer>
 
       <div style={{ margin: '0 0 50px' }}>
-        {latitude && longitude && (
-          <Map
-            proc={proc}
-            simple={true}
-            google={google}
-            center={{ lat: latitude, lng: longitude }}
-            height="300px"
-            zoom={15}
-          />
-        )}
+        {
+          //   latitude && longitude && (
+          //   <Map
+          //     proc={proc}
+          //     simple={true}
+          //     google={google}
+          //     center={{ lat: latitude, lng: longitude }}
+          //     height="300px"
+          //     zoom={15}
+          //   />
+          // )
+        }
       </div>
 
       <FormItem

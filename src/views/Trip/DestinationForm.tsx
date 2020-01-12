@@ -1,30 +1,24 @@
 import React, { useState } from 'react'
 
 import FormItem from './FormItem'
-import StatesDropdown from './StatesDropdown'
 
 import Map from '../Maps/Map'
 
 import DateFnsUtils from '@date-io/date-fns'
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 
-import GridItem from 'components/Grid/GridItem'
-import GridContainer from 'components/Grid/GridContainer'
+import GridItem from '../../components/Grid/GridItem'
+import GridContainer from '../../components/Grid/GridContainer'
 
-import ChevronLeftOutlinedIcon from '@material-ui/icons/ChevronLeftOutlined'
-import ChevronRightOutlinedIcon from '@material-ui/icons/ChevronRightOutlined'
-import RateReviewOutlinedIcon from '@material-ui/icons/RateReviewOutlined'
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined'
-import Button from '@material-ui/core/Button'
-import PrevButton from 'components/ActionButton/PrevButton'
-import NextButton from 'components/ActionButton/NextButton'
+import PrevButton from '../../components/ActionButton/PrevButton'
+import NextButton from '../../components/ActionButton/NextButton'
 const DestinationForm = ({
   setForm,
   triggerSetForm,
   formData,
   navigation,
   google,
-}) => {
+}: any) => {
   const {
     destinationAddress,
     destinationLatitude,
@@ -35,20 +29,20 @@ const DestinationForm = ({
 
   const [selectedDate, handleDateChange] = useState(destinationAddress)
 
-  const proc = (address, lat, lng) => {
-    document.getElementsByName('destinationAddress')[0].value = address
-    document.getElementsByName('destinationLatitude')[0].value = lat
-    document.getElementsByName('destinationLongitude')[0].value = lng
+  const proc = (address: any, lat: any, lng: any) => {
+    // document.getElementsByName('destinationAddress')[0].value = address
+    // document.getElementsByName('destinationLatitude')[0].value = lat
+    // document.getElementsByName('destinationLongitude')[0].value = lng
 
     triggerSetForm('destinationAddress', address)
     triggerSetForm('destinationLatitude', lat)
     triggerSetForm('destinationLongitude', lng)
   }
 
-  const changeDate = newDate => {
+  const changeDate = (newDate: any): void => {
     handleDateChange(newDate)
     setTimeout(() => {
-      document.getElementsByName('estimatedArrivalTime')[0].value = newDate
+      // document.getElementsByName('estimatedArrivalTime')[0].value = newDate
 
       triggerSetForm('estimatedArrivalTime', newDate)
     }, 100)
@@ -95,14 +89,16 @@ const DestinationForm = ({
       </GridContainer>
 
       <div style={{ margin: '0 0 50px' }}>
-        <Map
-          proc={proc}
-          simple={true}
-          google={google}
-          center={{ lat: 18.5204, lng: 73.8567 }}
-          height="300px"
-          zoom={15}
-        />
+        {
+          // <Map
+          //   proc={proc}
+          //   simple={true}
+          //   google={google}
+          //   center={{ lat: 18.5204, lng: 73.8567 }}
+          //   height="300px"
+          //   zoom={15}
+          // />
+        }
       </div>
 
       <FormItem

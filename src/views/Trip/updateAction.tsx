@@ -1,9 +1,9 @@
-export default function updateAction(state, payload) {
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        ...payload
-      }
-    };
+export default function updateAction(state: any, payload: any) {
+  return {
+    ...state,
+    data: {
+      ...state.data,
+      ...payload,
+    },
   }
+}

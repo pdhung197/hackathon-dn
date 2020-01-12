@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-const FormItem = ({label, children, type = 'text', ...otherProps }) => (
+const FormItem = ({ label, children, type = 'text', ...otherProps }: any) => (
   <div>
     {type === 'text' ? (
       <>
         <label>{label}</label>
-        <input type={type} {...otherProps}/>
+        <input type={type} {...otherProps} />
       </>
     ) : (
       <>
@@ -15,6 +15,6 @@ const FormItem = ({label, children, type = 'text', ...otherProps }) => (
       </>
     )}
   </div>
-);
+)
 
-export default FormItem;
+export default FormItem

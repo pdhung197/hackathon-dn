@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 // @material-ui/core components
-import { makeStyles } from '@material-ui/core/styles'
+import { createStyles } from '@material-ui/core'
+import withStyles from '@material-ui/core/styles/withStyles'
 // core components
 import GridItem from '../../components/Grid/GridItem'
 import GridContainer from '../../components/Grid/GridContainer'
@@ -12,17 +13,11 @@ import CardBody from '../../components/Card/CardBody'
 import firebase from '../../firebase'
 import Table from './Table'
 
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
-import Grid from '@material-ui/core/Grid'
-import TextField from '@material-ui/core/TextField'
 import usePagination from 'firestore-pagination-hook'
 import LoadButton from '../../components/ActionButton/LoadButton'
+import { Booking } from '../../types'
 
-const styles = {
+const styles = createStyles({
   cardCategoryWhite: {
     '&,& a,& a:hover,& a:focus': {
       color: 'rgba(255,255,255,.62)',
@@ -39,7 +34,7 @@ const styles = {
     color: '#FFFFFF',
     marginTop: '0px',
     minHeight: 'auto',
-    fontWeight: '300',
+    // fontWeight: '300',
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
     marginBottom: '3px',
     textDecoration: 'none',
@@ -50,19 +45,21 @@ const styles = {
       lineHeight: '1',
     },
   },
-}
+})
 
-const useStyles = makeStyles(styles)
+// const useStyles = makeStyles(styles)
 
-export default function VehicleList() {
+function Page(props: any) {
   const db = firebase.firestore()
   const datastore = db.collection('bookings')
 
-  const classes = useStyles()
-  const [list, setList] = useState([])
+  // const classes = useStyles()
+  const { classes } = props
 
-  const deleteDoc = id => {
-    setList(list.filter(doc => doc.id !== id))
+  const [list, setList] = useState<Booking[]>([])
+
+  const deleteDoc = (id: string): void => {
+    setList(list.filter((doc: any): any => doc.id !== id))
     datastore.doc(id).delete()
   }
 
@@ -79,7 +76,7 @@ export default function VehicleList() {
   })
 
   useEffect(() => {
-    setList(items.map(doc => ({ ...doc.data(), id: doc.id })))
+    setList(items.map((doc: any): any => ({ ...doc.data(), id: doc.id })))
   }, [items])
 
   return (
@@ -115,3 +112,5 @@ export default function VehicleList() {
     </GridContainer>
   )
 }
+
+export default withStyles(styles)(Page)
