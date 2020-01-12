@@ -120,7 +120,7 @@ function Page(props: any) {
     items,
     loadMore,
   } = usePagination(
-    stateFilter == -1
+    stateFilter === -1
       ? datastore.orderBy('updatedAt', 'desc')
       : datastore
           .where('state', '==', stateFilter)

@@ -1,45 +1,45 @@
-import React from 'react';
-import classNames from 'classnames';
+import React from 'react'
+import classNames from 'classnames'
 // import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 // @material-ui/core components
-import withStyles from '@material-ui/core/styles/withStyles';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Icon from '@material-ui/core/Icon';
+import withStyles from '@material-ui/core/styles/withStyles'
+import Drawer from '@material-ui/core/Drawer'
+import Hidden from '@material-ui/core/Hidden'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Icon from '@material-ui/core/Icon'
 // core components
-import AdminNavbarLinks from '../Navbars/AdminNavbarLinks';
-import RTLNavbarLinks from '../Navbars/RTLNavbarLinks';
+import AdminNavbarLinks from '../Navbars/AdminNavbarLinks'
+import RTLNavbarLinks from '../Navbars/RTLNavbarLinks'
 
-import sidebarStyle from '../../assets/jss/material-dashboard-react/components/sidebarStyle';
+import sidebarStyle from '../../assets/jss/material-dashboard-react/components/sidebarStyle'
 
 const Sidebar = ({ ...props }) => {
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName: any) {
-    return props.location.pathname.indexOf(routeName) > -1 ? true : false;
+    return props.location.pathname.indexOf(routeName) > -1 ? true : false
   }
-  const { classes, color, logo, image, logoText, routes } = props;
+  const { classes, color, logo, image, logoText, routes } = props
   var links = (
     <List className={classes.list}>
       {routes.map((prop: any, key: any) => {
-        var activePro = ' ';
-        var listItemClasses;
+        var activePro = ' '
+        var listItemClasses
         if (prop.path === '/upgrade-to-pro') {
-          activePro = classes.activePro + ' ';
+          activePro = classes.activePro + ' '
           listItemClasses = classNames({
-            [' ' + classes[color]]: true
-          });
+            [' ' + classes[color]]: true,
+          })
         } else {
           listItemClasses = classNames({
-            [' ' + classes[color]]: activeRoute(prop.layout + prop.path)
-          });
+            [' ' + classes[color]]: activeRoute(prop.layout + prop.path),
+          })
         }
         const whiteFontClasses = classNames({
-          [' ' + classes.whiteFont]: activeRoute(prop.layout + prop.path)
-        });
+          [' ' + classes.whiteFont]: activeRoute(prop.layout + prop.path),
+        })
         return (
           <NavLink
             to={prop.layout + prop.path}
@@ -47,11 +47,14 @@ const Sidebar = ({ ...props }) => {
             activeClassName="active"
             key={key}
           >
-            <ListItem button={true} className={classes.itemLink + listItemClasses}>
+            <ListItem
+              button={true}
+              className={classes.itemLink + listItemClasses}
+            >
               {typeof prop.icon === 'string' ? (
                 <Icon
                   className={classNames(classes.itemIcon, whiteFontClasses, {
-                    [classes.itemIconRTL]: props.rtlActive
+                    [classes.itemIconRTL]: props.rtlActive,
                   })}
                 >
                   {prop.icon}
@@ -59,31 +62,29 @@ const Sidebar = ({ ...props }) => {
               ) : (
                 <prop.icon
                   className={classNames(classes.itemIcon, whiteFontClasses, {
-                    [classes.itemIconRTL]: props.rtlActive
+                    [classes.itemIconRTL]: props.rtlActive,
                   })}
                 />
               )}
               <ListItemText
-                primary={
-                  props.rtlActive ? prop.rtlName : prop.name
-                }
+                primary={props.rtlActive ? prop.rtlName : prop.name}
                 className={classNames(classes.itemText, whiteFontClasses, {
-                  [classes.itemTextRTL]: props.rtlActive
+                  [classes.itemTextRTL]: props.rtlActive,
                 })}
                 disableTypography={true}
               />
             </ListItem>
           </NavLink>
-        );
+        )
       })}
     </List>
-  );
+  )
   var brand = (
     <div className={classes.logo}>
       <a
-        href="https://www.creative-tim.com"
+        href="#"
         className={classNames(classes.logoLink, {
-          [classes.logoLinkRTL]: props.rtlActive
+          [classes.logoLinkRTL]: props.rtlActive,
         })}
       >
         <div className={classes.logoImage}>
@@ -92,7 +93,7 @@ const Sidebar = ({ ...props }) => {
         {logoText}
       </a>
     </div>
-  );
+  )
   return (
     <div>
       <Hidden mdUp={true} implementation="css">
@@ -102,12 +103,12 @@ const Sidebar = ({ ...props }) => {
           open={props.open}
           classes={{
             paper: classNames(classes.drawerPaper, {
-              [classes.drawerPaperRTL]: props.rtlActive
-            })
+              [classes.drawerPaperRTL]: props.rtlActive,
+            }),
           }}
           onClose={props.handleDrawerToggle}
           ModalProps={{
-            keepMounted: true // Better open performance on mobile.
+            keepMounted: true, // Better open performance on mobile.
           }}
         >
           {brand}
@@ -130,8 +131,8 @@ const Sidebar = ({ ...props }) => {
           open={true}
           classes={{
             paper: classNames(classes.drawerPaper, {
-              [classes.drawerPaperRTL]: props.rtlActive
-            })
+              [classes.drawerPaperRTL]: props.rtlActive,
+            }),
           }}
         >
           {brand}
@@ -145,11 +146,11 @@ const Sidebar = ({ ...props }) => {
         </Drawer>
       </Hidden>
     </div>
-  );
-};
+  )
+}
 
 // Sidebar.propTypes = {
 //   classes: PropTypes.object.isRequired
 // };
 
-export default withStyles(sidebarStyle)(Sidebar);
+export default withStyles(sidebarStyle)(Sidebar)
