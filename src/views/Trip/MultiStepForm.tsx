@@ -41,22 +41,22 @@ export default ({ addDoc, initialFormState }: any) => {
 
   const props = { formData, setForm, triggerSetForm, navigation, addDoc }
 
-  switch (step) {
-    case 0: //'info':
+  switch (step.toString()) {
+    case 'info':
       return <InfoForm {...props} />
-    case 1: //'departure':
+    case 'departure':
       return <DepartureForm {...props} />
-    case 2: //'destination':
+    case 'destination':
       return <DestinationForm {...props} />
-    case 3: //'vehicle':
+    case 'vehicle':
       return <VehicleForm {...props} />
-    case 4: //'driver':
+    case 'driver':
       return <DriverForm {...props} />
-    case 5: //'review':
+    case 'review':
       return <ReviewForm {...props} />
-    case 6: //'confirmation':
+    case 'confirmation':
       return <ConfirmationForm {...props} />
     default:
-      return null
+      return <>{step}</>
   }
 }

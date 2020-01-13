@@ -66,14 +66,14 @@ const dashboardRoutes = [
     component: RiderList,
     layout: '/admin',
   },
-  // {
-  //     path: '/maps',
-  //     name: 'Maps',
-  //     rtlName: 'خرائط',
-  //     icon: LocationOn,
-  //     component: Maps,
-  //     layout: '/admin',
-  // },
+  {
+    path: '/maps',
+    name: 'Maps',
+    rtlName: 'خرائط',
+    icon: LocationOn,
+    component: Maps,
+    layout: '/admin',
+  },
 
   //////////////////////////////
 

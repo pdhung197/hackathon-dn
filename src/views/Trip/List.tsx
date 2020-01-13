@@ -8,7 +8,6 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import Grid from '@material-ui/core/Grid'
 import GridItem from '../../components/Grid/GridItem'
 import GridContainer from '../../components/Grid/GridContainer'
-// import Table from "components/Table/Table"
 import Card from '../../components/Card/Card'
 import CardHeader from '../../components/Card/CardHeader'
 import CardBody from '../../components/Card/CardBody'
@@ -17,7 +16,7 @@ import firebase from '../../firebase'
 import Table from './Table'
 import EditForm from './EditForm'
 
-// import { useStep, useForm } from 'react-hooks-helper'
+import { useStep, useForm } from 'react-hooks-helper'
 
 import MultiStepForm from './MultiStepForm'
 import usePagination from 'firestore-pagination-hook'
@@ -136,7 +135,7 @@ const Page = (props: any) => {
     datastore.doc(id).delete()
   }
 
-  const [editing, setEditing] = useState(false)
+  const [editing, setEditing] = useState<boolean>(false)
 
   const initialFormState = {
     alias: '',
@@ -246,10 +245,12 @@ const Page = (props: any) => {
                       />
                     </div>
                   ) : (
-                    <MultiStepForm
-                      addDoc={addDoc}
-                      initialFormState={initialFormState}
-                    />
+                    <div>
+                      <MultiStepForm
+                        addDoc={addDoc}
+                        initialFormState={initialFormState}
+                      />
+                    </div>
                   )}
                 </div>
                 <div>
