@@ -9,47 +9,54 @@ const TripTable = (props: any) => {
     <table>
       <thead>
         <tr>
-          {/* <th style={{ width: '2%' }}></th> */}
+          <th style={{ width: '2%' }}>No</th>
           <th style={{ width: '10%' }}>Alias</th>
           <th style={{ width: '10%' }}>Routes</th>
-          <th style={{ width: '10%' }}>Departure</th>
-          <th style={{ width: '14%' }}>DepartureTime</th>
-          <th style={{ width: '10%' }}>Destination</th>
-          <th style={{ width: '14%' }}>ArrivalTime</th>
+
+          <th style={{ width: '40%' }}>Stations</th>
+
+          <th style={{ width: '18%' }}>Date and time</th>
+
           <th style={{ width: '10%' }}>Vehicle</th>
           <th style={{ width: '5%' }}>Driver</th>
-          <th style={{ width: '5%' }}>Datetime</th>
+          <th style={{ width: '5%' }}></th>
           <th colSpan={2}>Actions</th>
         </tr>
       </thead>
       <tbody>
         {props.list.length > 0 ? (
           props.list.map(
-            (doc: any): ReactElement => (
+            (doc: any, idx: number): ReactElement => (
               <tr key={doc.id}>
-                {/* <td></td> */}
+                <td>{idx + 1}</td>
                 <td>{doc.alias}</td>
                 <td>{doc.routes}</td>
                 <td>
-                  {doc.departureAddress}
-                  <br />
-                  {doc.departureLatitude}
-                  <br />
-                  {doc.departureLongitude}
+                  {doc.stations && (
+                    <table>
+                      <tbody>
+                        {doc.stations.length > 0 ? (
+                          doc.stations.map(
+                            (subdoc: any, idx: number): ReactElement => (
+                              <tr key={idx}>
+                                <td>{idx + 1}</td>
+                                <td>{subdoc.addr}</td>
+                              </tr>
+                            ),
+                          )
+                        ) : (
+                          <tr>
+                            <td colSpan={4}>No stations</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  )}
                 </td>
                 <td>
                   <Moment format="YYYY-MM-DD HH:mm">
                     {doc.departureDatetime}
                   </Moment>
-                </td>
-                <td>
-                  {doc.destinationAddress}
-                  <br />
-                  {doc.destinationLatitude}
-                  <br />
-                  {doc.destinationLongitude}
-                </td>
-                <td>
                   <Moment format="YYYY-MM-DD HH:mm">
                     {doc.estimatedArrivalTime}
                   </Moment>
@@ -97,7 +104,7 @@ const TripTable = (props: any) => {
           )
         ) : (
           <tr>
-            <td colSpan={11}>No trip</td>
+            <td colSpan={10}>No trips</td>
           </tr>
         )}
       </tbody>

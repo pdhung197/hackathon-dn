@@ -2,8 +2,7 @@ import React from 'react'
 import { useForm, useStep, UseStepParams } from 'react-hooks-helper'
 
 import InfoForm from './InfoForm'
-import DepartureForm from './DepartureForm'
-import DestinationForm from './DestinationForm'
+import StationsForm from './StationsForm'
 import VehicleForm from './VehicleForm'
 import DriverForm from './DriverForm'
 import ReviewForm from './ReviewForm'
@@ -11,8 +10,7 @@ import ConfirmationForm from './ConfirmationForm'
 
 const steps = [
   'info',
-  'departure',
-  'destination',
+  'stations',
   'vehicle',
   'driver',
   'review',
@@ -39,15 +37,30 @@ export default ({ addDoc, initialFormState }: any) => {
     setForm(e)
   }
 
-  const props = { formData, setForm, triggerSetForm, navigation, addDoc }
+  const triggerStationsForm = (value: any[]) => {
+    let e = {
+      target: {
+        name: 'stations',
+        value: value,
+      },
+    }
+    setForm(e)
+  }
+
+  const props = {
+    formData,
+    setForm,
+    triggerSetForm,
+    triggerStationsForm,
+    navigation,
+    addDoc,
+  }
 
   switch (step.toString()) {
     case 'info':
       return <InfoForm {...props} />
-    case 'departure':
-      return <DepartureForm {...props} />
-    case 'destination':
-      return <DestinationForm {...props} />
+    case 'stations':
+      return <StationsForm {...props} />
     case 'vehicle':
       return <VehicleForm {...props} />
     case 'driver':

@@ -7,13 +7,10 @@ export interface Trip {
   id: string
   alias: string
   routes: string
-  departureAddress: string
-  departureLatitude: string
-  departureLongitude: string
+
+  stations: object[]
+
   departureDatetime: string
-  destinationAddress: string
-  destinationLatitude: string
-  destinationLongitude: string
   estimatedArrivalTime: string
   vehicleId: string
   vehicleName: string
@@ -65,6 +62,7 @@ export interface Driver {
   attachUrl: string
   createdAt: object | null
   updatedAt: object | null
+  state: number
 }
 
 export interface Pickup {

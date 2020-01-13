@@ -69,6 +69,8 @@ class Map extends Component<MyProps, MyState> {
               city: city ? city : '',
               state: state ? state : '',
             })
+            if (self.props.proc)
+              self.props.proc(address, latlng.lat, latlng.lng)
           }
         }
       })
@@ -280,7 +282,7 @@ class Map extends Component<MyProps, MyState> {
     if (this.props.center.lat !== undefined) {
       map = (
         <div>
-          <div className={this.props.simple ? 'hidden' : ''}>
+          <div style={{ display: 'none' }}>
             <div className="form-group">
               <label htmlFor="">City</label>
               <input

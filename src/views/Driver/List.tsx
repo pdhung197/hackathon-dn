@@ -76,11 +76,11 @@ function Page(props: any) {
     name: '',
     email: '',
     phone: '',
-    password: '',
     attachName: '',
     attachUrl: '',
     createdAt: null,
     updatedAt: null,
+    state: 0,
   }
   const [currentDoc, setCurrentDoc] = useState<Driver>(initialFormState)
 
@@ -95,6 +95,7 @@ function Page(props: any) {
       attachUrl: doc.attachUrl,
       createdAt: doc.createdAt ? doc.createdAt : null,
       updatedAt: doc.updatedAt ? doc.updatedAt : null,
+      state: doc.state,
     })
   }
 

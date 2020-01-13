@@ -7,6 +7,7 @@ import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 
 import PrevButton from '../../components/ActionButton/PrevButton'
 import NextButton from '../../components/ActionButton/NextButton'
+import Grid from '@material-ui/core/Grid'
 
 const DestinationForm = ({
   setForm,
@@ -14,21 +15,30 @@ const DestinationForm = ({
   formData,
   navigation,
 }: any) => {
-  const { alias, routes, departureDatetime } = formData
+  const { alias, routes, departureDatetime, estimatedArrivalTime } = formData
   const { previous, next } = navigation
 
   const departureDatetimeRef = useRef<HTMLInputElement>(null)
+  const estimatedArrivalDatetimeRef = useRef<HTMLInputElement>(null)
 
   const [selectedDate, handleDateChange] = useState(departureDatetime)
+  const [selectedDate2, handleDateChange2] = useState(estimatedArrivalTime)
 
   const changeDate = (newDate: any) => {
     handleDateChange(newDate)
     setTimeout(() => {
-      // document.getElementsByName('departureDatetime')[0].value = newDate
-
       if (null !== departureDatetimeRef.current)
         departureDatetimeRef.current.value = newDate
       triggerSetForm('departureDatetime', newDate)
+    }, 100)
+  }
+
+  const changeDate2 = (newDate: any) => {
+    handleDateChange2(newDate)
+    setTimeout(() => {
+      if (null !== estimatedArrivalDatetimeRef.current)
+        estimatedArrivalDatetimeRef.current.value = newDate
+      triggerSetForm('estimatedArrivalDatetime', newDate)
     }, 100)
   }
 
@@ -44,19 +54,36 @@ const DestinationForm = ({
         onChange={setForm}
       />
 
-      <label>Datetime</label>
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <label>DepartureDatetime</label>
 
-      <input
-        type="hidden"
-        readOnly
-        name="departureDatetime"
-        value={departureDatetime}
-        onChange={setForm}
-      />
+          <input
+            type="hidden"
+            readOnly
+            name="departureDatetime"
+            value={departureDatetime}
+            onChange={setForm}
+          />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <DateTimePicker value={selectedDate} onChange={changeDate} />
+          </MuiPickersUtilsProvider>
+        </Grid>
+        <Grid item xs={6}>
+          <label>ArrivalDatetime</label>
 
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <DateTimePicker value={selectedDate} onChange={changeDate} />
-      </MuiPickersUtilsProvider>
+          <input
+            type="hidden"
+            readOnly
+            name="estimatedArrivalTime"
+            value={estimatedArrivalTime}
+            onChange={setForm}
+          />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <DateTimePicker value={selectedDate2} onChange={changeDate2} />
+          </MuiPickersUtilsProvider>
+        </Grid>
+      </Grid>
 
       <div className="navigation">
         <NextButton proc={next} />

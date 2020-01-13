@@ -39,12 +39,16 @@ const DriverForm = ({ setForm, triggerSetForm, formData, navigation }: any) => {
   const { previous, next } = navigation
 
   const classes = useStyles()
-  const [currentDriver, setCurrentDriver] = useState<TDriver>({
-    driverId,
-    driverName,
-    driverPhone,
-    driverEmail,
-    // state,
+  const [currentDriver, setCurrentDriver] = useState<Driver>({
+    id: driverId,
+    name: driverName,
+    phone: driverPhone,
+    email: driverEmail,
+    attachName: '',
+    attachUrl: '',
+    createdAt: null,
+    updatedAt: null,
+    state: 0,
   })
 
   const handleCurrentDriverChange = (event: any): void => {
@@ -83,21 +87,16 @@ const DriverForm = ({ setForm, triggerSetForm, formData, navigation }: any) => {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              {
-                //       drivers.map(v => {
-                //     return <MenuItem value={v}>{v.name}</MenuItem>
-                //   })
-              }
+              {drivers.map((v: any) => {
+                return <MenuItem value={v}>{v.name}</MenuItem>
+              })}
             </Select>
           </FormControl>
         </Grid>
         <Grid item xs={4}>
           <FormItem
             label="State"
-            value={
-              // currentDriver.state === 0 ? 'Ready' : 'Not available'
-              'Ready'
-            }
+            value={currentDriver.state === 0 ? 'Ready' : 'Not available'}
             readOnly
           />
         </Grid>
@@ -105,13 +104,13 @@ const DriverForm = ({ setForm, triggerSetForm, formData, navigation }: any) => {
 
       <Grid container spacing={3}>
         <Grid item xs={4}>
-          <FormItem label="Name" value={currentDriver.driverName} readOnly />
+          <FormItem label="Name" value={currentDriver.name} readOnly />
         </Grid>
         <Grid item xs={4}>
-          <FormItem label="Email" value={currentDriver.driverEmail} readOnly />
+          <FormItem label="Email" value={currentDriver.email} readOnly />
         </Grid>
         <Grid item xs={4}>
-          <FormItem label="Phone" value={currentDriver.driverPhone} readOnly />
+          <FormItem label="Phone" value={currentDriver.phone} readOnly />
         </Grid>
       </Grid>
 

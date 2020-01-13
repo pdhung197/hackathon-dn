@@ -33,7 +33,7 @@ const switchRoutes = (
       }
       return null
     })}
-    <Redirect from="/admin" to="/admin/trips" />
+    <Redirect from="/admin" to="/admin/trips/list" />
   </Switch>
 )
 

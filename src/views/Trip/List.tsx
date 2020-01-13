@@ -18,7 +18,7 @@ import EditForm from './EditForm'
 
 import { useStep, useForm } from 'react-hooks-helper'
 
-import MultiStepForm from './MultiStepForm'
+import AddForm from './AddForm'
 import usePagination from 'firestore-pagination-hook'
 import LoadButton from '../../components/ActionButton/LoadButton'
 import { Trip } from '../../types'
@@ -140,13 +140,9 @@ const Page = (props: any) => {
   const initialFormState = {
     alias: '',
     routes: '',
-    departureAddress: '',
-    departureLatitude: 0,
-    departureLongitude: 0,
+    stations: [],
+
     departureDatetime: new Date(),
-    destinationAddress: '',
-    destinationLatitude: 0,
-    destinationLongitude: 0,
     estimatedArrivalTime: new Date(),
 
     vehicleId: '',
@@ -172,20 +168,15 @@ const Page = (props: any) => {
   }
 
   const [currentDoc, setCurrentDoc] = useState(initialFormState)
-
   const editDoc = (doc: any) => {
     setEditing(true)
     setCurrentDoc({
       // id: doc.id,
       alias: doc.alias,
       routes: doc.routes,
-      departureAddress: doc.departureAddress,
-      departureLatitude: doc.departureLatitude,
-      departureLongitude: doc.departureLongitude,
+      stations: doc.stations,
+
       departureDatetime: doc.departureDatetime,
-      destinationAddress: doc.destinationAddress,
-      destinationLatitude: doc.destinationLatitude,
-      destinationLongitude: doc.destinationLongitude,
       estimatedArrivalTime: doc.estimatedArrivalTime,
 
       vehicleId: doc.vehicleId,
@@ -246,7 +237,7 @@ const Page = (props: any) => {
                     </div>
                   ) : (
                     <div>
-                      <MultiStepForm
+                      <AddForm
                         addDoc={addDoc}
                         initialFormState={initialFormState}
                       />

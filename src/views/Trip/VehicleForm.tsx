@@ -59,17 +59,17 @@ const VehicleForm = ({
   const { previous, next } = navigation
 
   const classes = useStyles()
-  const [currentVehicle, setCurrentVehicle] = useState<TVehicle>({
-    vehicleId,
-    vehicleName,
-    vehicleCapacity,
-    vehicleModel,
-    vehicleColor,
-    vehicleLicensePlate,
-    vehicleAmenities,
-    vehicleRow,
-    vehicleColumn,
-    vehicleState,
+  const [currentVehicle, setCurrentVehicle] = useState<Vehicle>({
+    id: vehicleId,
+    name: vehicleName,
+    capacity: vehicleCapacity,
+    model: vehicleModel,
+    color: vehicleColor,
+    licensePlate: vehicleLicensePlate,
+    amenities: vehicleAmenities,
+    row: vehicleRow,
+    column: vehicleColumn,
+    state: vehicleState,
   })
 
   const handleCurrentVehicleChange = (event: any) => {
@@ -117,20 +117,16 @@ const VehicleForm = ({
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              {
-                //   vehicles.map(v => {
-                //   return <MenuItem value={v}>{v.name}</MenuItem>
-                // })
-              }
+              {vehicles.map((v: any) => {
+                return <MenuItem value={v}>{v.name}</MenuItem>
+              })}
             </Select>
           </FormControl>
         </Grid>
         <Grid item xs={4}>
           <FormItem
             label="State"
-            value={
-              currentVehicle.vehicleState === 0 ? 'Ready' : 'Not available'
-            }
+            value={currentVehicle.state === 0 ? 'Ready' : 'Not available'}
             readOnly
           />
         </Grid>
@@ -138,52 +134,36 @@ const VehicleForm = ({
 
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <FormItem label="Name" value={currentVehicle.vehicleName} readOnly />
+          <FormItem label="Name" value={currentVehicle.name} readOnly />
         </Grid>
         <Grid item xs={6}>
-          <FormItem
-            label="Capacity"
-            value={currentVehicle.vehicleCapacity}
-            readOnly
-          />
+          <FormItem label="Capacity" value={currentVehicle.capacity} readOnly />
         </Grid>
         <Grid item xs={6}>
-          <FormItem
-            label="Model"
-            value={currentVehicle.vehicleModel}
-            readOnly
-          />
+          <FormItem label="Model" value={currentVehicle.model} readOnly />
         </Grid>
         <Grid item xs={6}>
-          <FormItem
-            label="Color"
-            value={currentVehicle.vehicleColor}
-            readOnly
-          />
+          <FormItem label="Color" value={currentVehicle.color} readOnly />
         </Grid>
         <Grid item xs={6}>
           <FormItem
             label="Amenities"
-            value={currentVehicle.vehicleAmenities}
+            value={currentVehicle.amenities}
             readOnly
           />
         </Grid>
         <Grid item xs={6}>
           <FormItem
             label="LicensePlate"
-            value={currentVehicle.vehicleLicensePlate}
+            value={currentVehicle.licensePlate}
             readOnly
           />
         </Grid>
         <Grid item xs={6}>
-          <FormItem label="Row" value={currentVehicle.vehicleRow} readOnly />
+          <FormItem label="Row" value={currentVehicle.row} readOnly />
         </Grid>
         <Grid item xs={6}>
-          <FormItem
-            label="Column"
-            value={currentVehicle.vehicleColumn}
-            readOnly
-          />
+          <FormItem label="Column" value={currentVehicle.column} readOnly />
         </Grid>
       </Grid>
 

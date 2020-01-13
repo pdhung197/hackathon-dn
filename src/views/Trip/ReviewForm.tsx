@@ -1,20 +1,19 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import PrevButton from '../../components/ActionButton/PrevButton'
 import NextButton from '../../components/ActionButton/NextButton'
 import EditButton from '../../components/ActionButton/ReviewEditButton'
+
+import { NavigationProps } from 'react-hooks-helper'
+
 const ReviewForm = ({ setForm, formData, navigation, addDoc }: any) => {
   const {
     alias,
     routes,
-    departureAddress,
-    departureLatitude,
-    departureLongitude,
     departureDatetime,
-    destinationAddress,
-    destinationLatitude,
-    destinationLongitude,
     estimatedArrivalTime,
+
+    stations,
 
     vehicleId,
     vehicleName,
@@ -35,9 +34,16 @@ const ReviewForm = ({ setForm, formData, navigation, addDoc }: any) => {
 
   const { go, previous } = navigation
 
+  // 'info',0
+  // 'stations',1
+  // 'vehicle',2
+  // 'driver',3
+  // 'review',4
+  // 'confirmation',5
+
   const addTrip = () => {
     addDoc(formData)
-    go('confirmation')
+    go(5)
   }
 
   return (
@@ -45,33 +51,52 @@ const ReviewForm = ({ setForm, formData, navigation, addDoc }: any) => {
       <h2>Trip Review</h2>
 
       <h3>
-        Alias, Routes
-        <EditButton proc={() => go('info')} />
+        Alias, Routes, Date and time
+        <EditButton proc={() => go(0)} />
       </h3>
       <div>{`${alias}`}</div>
       <div>{routes}</div>
-
-      <h3>
-        Departure
-        <EditButton proc={() => go('departure')} />
-      </h3>
-      <div>{`${departureAddress}`}</div>
-      <div>{departureLatitude}</div>
-      <div>{departureLongitude}</div>
       <div>{`${departureDatetime}`}</div>
-
-      <h3>
-        Destination
-        <EditButton proc={() => go('destination')} />
-      </h3>
-      <div>{`${destinationAddress}`}</div>
-      <div>{destinationLatitude}</div>
-      <div>{destinationLongitude}</div>
+      {'~'}
       <div>{`${estimatedArrivalTime}`}</div>
 
       <h3>
+        Stations
+        <EditButton proc={() => go(1)} />
+      </h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th style={{ width: '10%' }}>No</th>
+            <th style={{ width: '20%' }}>Address</th>
+            <th style={{ width: '20%' }}>Latitude</th>
+            <th style={{ width: '20%' }}>Longitude</th>
+          </tr>
+        </thead>
+        <tbody>
+          {stations.length > 0 ? (
+            stations.map(
+              (doc: any, idx: number): ReactElement => (
+                <tr key={idx}>
+                  <td>{idx + 1}</td>
+                  <td>{doc.addr}</td>
+                  <td>{doc.lat}</td>
+                  <td>{doc.lng}</td>
+                </tr>
+              ),
+            )
+          ) : (
+            <tr>
+              <td colSpan={4}>No stations</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+
+      <h3>
         Vehicle
-        <EditButton proc={() => go('vehicle')} />
+        <EditButton proc={() => go(2)} />
       </h3>
       <div>{vehicleName}</div>
       <div>{vehicleCapacity}</div>
@@ -84,7 +109,7 @@ const ReviewForm = ({ setForm, formData, navigation, addDoc }: any) => {
 
       <h3>
         Driver
-        <EditButton proc={() => go('driver')} />
+        <EditButton proc={() => go(3)} />
       </h3>
       <div>{driverName}</div>
       <div>{driverEmail}</div>
