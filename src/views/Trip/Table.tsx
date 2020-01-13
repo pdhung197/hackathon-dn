@@ -58,7 +58,7 @@ const TripTable = (props: any) => {
                     {doc.departureDatetime}
                   </Moment>
                   <Moment format="YYYY-MM-DD HH:mm">
-                    {doc.estimatedArrivalTime}
+                    {doc.estimatedArrivalDatetime}
                   </Moment>
                 </td>
                 <td>

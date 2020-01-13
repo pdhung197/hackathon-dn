@@ -48,11 +48,13 @@ const StationsForm = ({
 
   const initialCurrentStation = {
     id: '',
+    name: '',
     addr: '',
     lat: latitude,
     lng: longitude,
   }
 
+  const stationNameRef = useRef<HTMLInputElement>(null)
   const stationAddressRef = useRef<HTMLInputElement>(null)
   const stationLatitudeRef = useRef<HTMLInputElement>(null)
   const stationLongitudeRef = useRef<HTMLInputElement>(null)
@@ -67,6 +69,7 @@ const StationsForm = ({
 
     setCurrentStation({
       id: lat + '' + lng,
+      name: '',
       addr: address,
       lat,
       lng,
@@ -88,6 +91,7 @@ const StationsForm = ({
     setEditing(true)
     setCurrentStation({
       id: doc.id,
+      name: doc.name,
       addr: doc.addr,
       lat: doc.lat,
       lng: doc.lng,
@@ -146,37 +150,59 @@ const StationsForm = ({
         )}
       </div>
 
-      <div>
-        <Fab color="secondary" aria-label="edit" size="small">
-          <AddIcon
-            onClick={() => {
-              if (editing === true)
-                setStationsList(
-                  stationsList.filter((doc: any): boolean =>
-                    doc.id === currentStation.id ? currentStation : doc,
-                  ),
+      <GridContainer>
+        <GridItem xs={2} sm={2} md={2}>
+          {'station name'}
+        </GridItem>
+        <GridItem xs={7} sm={7} md={7}>
+          <input type="text" ref={stationNameRef} />
+        </GridItem>
+        <GridItem xs={3} sm={3} md={3}>
+          <Fab color="secondary" aria-label="edit" size="small">
+            <AddIcon
+              onClick={() => {
+                if (
+                  stationNameRef.current &&
+                  stationNameRef.current.value === ''
+                ) {
+                  alert('Input station name!')
+                  return
+                }
+                if (
+                  stationNameRef.current &&
+                  stationNameRef.current.value !== ''
                 )
-              else
-                setStationsList([
-                  ...stationsList.filter(
-                    (doc: any): boolean => doc.id !== currentStation.id,
-                  ),
-                  currentStation,
-                ])
+                  currentStation.name = stationNameRef.current.value
 
-              triggerStationsForm(stationsList)
+                if (editing === true)
+                  setStationsList(
+                    stationsList.filter((doc: any): boolean =>
+                      doc.id === currentStation.id ? currentStation : doc,
+                    ),
+                  )
+                else
+                  setStationsList([
+                    ...stationsList.filter(
+                      (doc: any): boolean => doc.id !== currentStation.id,
+                    ),
+                    currentStation,
+                  ])
 
-              setEditing(false)
-            }}
-          />
-        </Fab>
-      </div>
+                triggerStationsForm(stationsList)
+
+                setEditing(false)
+              }}
+            />
+          </Fab>
+        </GridItem>
+      </GridContainer>
 
       <div>
         <table>
           <thead>
             <tr>
               <th style={{ width: '10%' }}>No</th>
+              <th style={{ width: '20%' }}>Name</th>
               <th style={{ width: '20%' }}>Address</th>
               <th style={{ width: '20%' }}>Latitude</th>
               <th style={{ width: '20%' }}>Longitude</th>
@@ -189,6 +215,7 @@ const StationsForm = ({
                 (doc: any, idx: number): ReactElement => (
                   <tr key={idx}>
                     <td>{idx + 1}</td>
+                    <td>{doc.name}</td>
                     <td>{doc.addr}</td>
                     <td>{doc.lat}</td>
                     <td>{doc.lng}</td>
@@ -203,7 +230,7 @@ const StationsForm = ({
               )
             ) : (
               <tr>
-                <td colSpan={6}>No stations</td>
+                <td colSpan={7}>No stations</td>
               </tr>
             )}
           </tbody>

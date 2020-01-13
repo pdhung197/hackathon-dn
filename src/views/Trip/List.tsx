@@ -143,7 +143,7 @@ const Page = (props: any) => {
     stations: [],
 
     departureDatetime: new Date(),
-    estimatedArrivalTime: new Date(),
+    estimatedArrivalDatetime: new Date(),
 
     vehicleId: '',
     vehicleName: '',
@@ -177,7 +177,7 @@ const Page = (props: any) => {
       stations: doc.stations,
 
       departureDatetime: doc.departureDatetime,
-      estimatedArrivalTime: doc.estimatedArrivalTime,
+      estimatedArrivalDatetime: doc.estimatedArrivalDatetime,
 
       vehicleId: doc.vehicleId,
       vehicleName: doc.vehicleName ? doc.vehicleName : null,

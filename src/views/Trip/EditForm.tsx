@@ -19,50 +19,6 @@ const EditForm = (props: any) => {
         props.updateDoc(doc)
       }}
     >
-      <label>departureAddress</label>
-      <input
-        type="text"
-        name="departureAddress"
-        value={doc.departureAddress}
-        onChange={handleInputChange}
-      />
-      <label>departureLatitude</label>
-      <input
-        type="text"
-        name="departureLatitude"
-        value={doc.departureLatitude}
-        onChange={handleInputChange}
-      />
-      <label>departureLongitude</label>
-      <input
-        type="text"
-        name="departureLongitude"
-        value={doc.departureLongitude}
-        onChange={handleInputChange}
-      />
-
-      <label>destinationAddress</label>
-      <input
-        type="text"
-        name="destinationAddress"
-        value={doc.destinationAddress}
-        onChange={handleInputChange}
-      />
-      <label>destinationLatitude</label>
-      <input
-        type="text"
-        name="destinationLatitude"
-        value={doc.destinationLatitude}
-        onChange={handleInputChange}
-      />
-      <label>destinationLongitude</label>
-      <input
-        type="text"
-        name="destinationLongitude"
-        value={doc.destinationLongitude}
-        onChange={handleInputChange}
-      />
-
       <label>vehicleCapacity</label>
       <input
         type="text"

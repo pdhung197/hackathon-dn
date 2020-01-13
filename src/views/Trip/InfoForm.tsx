@@ -15,14 +15,19 @@ const DestinationForm = ({
   formData,
   navigation,
 }: any) => {
-  const { alias, routes, departureDatetime, estimatedArrivalTime } = formData
+  const {
+    alias,
+    routes,
+    departureDatetime,
+    estimatedArrivalDatetime,
+  } = formData
   const { previous, next } = navigation
 
   const departureDatetimeRef = useRef<HTMLInputElement>(null)
   const estimatedArrivalDatetimeRef = useRef<HTMLInputElement>(null)
 
   const [selectedDate, handleDateChange] = useState(departureDatetime)
-  const [selectedDate2, handleDateChange2] = useState(estimatedArrivalTime)
+  const [selectedDate2, handleDateChange2] = useState(estimatedArrivalDatetime)
 
   const changeDate = (newDate: any) => {
     handleDateChange(newDate)
@@ -75,8 +80,8 @@ const DestinationForm = ({
           <input
             type="hidden"
             readOnly
-            name="estimatedArrivalTime"
-            value={estimatedArrivalTime}
+            name="estimatedArrivalDatetime"
+            value={estimatedArrivalDatetime}
             onChange={setForm}
           />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>

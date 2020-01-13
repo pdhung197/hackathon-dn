@@ -11,7 +11,7 @@ export interface Trip {
   stations: object[]
 
   departureDatetime: string
-  estimatedArrivalTime: string
+  estimatedArrivalDatetime: string
   vehicleId: string
   vehicleName: string
   vehicleCapacity: string

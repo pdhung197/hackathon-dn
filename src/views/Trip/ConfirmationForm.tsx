@@ -12,7 +12,7 @@ const ConfirmationForm = ({ navigation }: any) => {
       <div className="navigation">
         {/* <button onClick={()=>go("info")}>Finish</button> */}
 
-        <Button variant="outlined" color="secondary" onClick={() => go('info')}>
+        <Button variant="outlined" color="secondary" onClick={() => go(0)}>
           <CheckOutlinedIcon />
           Finish
         </Button>

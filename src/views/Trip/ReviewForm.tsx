@@ -11,7 +11,7 @@ const ReviewForm = ({ setForm, formData, navigation, addDoc }: any) => {
     alias,
     routes,
     departureDatetime,
-    estimatedArrivalTime,
+    estimatedArrivalDatetime,
 
     stations,
 
@@ -58,7 +58,7 @@ const ReviewForm = ({ setForm, formData, navigation, addDoc }: any) => {
       <div>{routes}</div>
       <div>{`${departureDatetime}`}</div>
       {'~'}
-      <div>{`${estimatedArrivalTime}`}</div>
+      <div>{`${estimatedArrivalDatetime}`}</div>
 
       <h3>
         Stations
@@ -69,6 +69,7 @@ const ReviewForm = ({ setForm, formData, navigation, addDoc }: any) => {
         <thead>
           <tr>
             <th style={{ width: '10%' }}>No</th>
+            <th style={{ width: '20%' }}>name</th>
             <th style={{ width: '20%' }}>Address</th>
             <th style={{ width: '20%' }}>Latitude</th>
             <th style={{ width: '20%' }}>Longitude</th>
@@ -80,6 +81,7 @@ const ReviewForm = ({ setForm, formData, navigation, addDoc }: any) => {
               (doc: any, idx: number): ReactElement => (
                 <tr key={idx}>
                   <td>{idx + 1}</td>
+                  <td>{doc.name}</td>
                   <td>{doc.addr}</td>
                   <td>{doc.lat}</td>
                   <td>{doc.lng}</td>
@@ -88,7 +90,7 @@ const ReviewForm = ({ setForm, formData, navigation, addDoc }: any) => {
             )
           ) : (
             <tr>
-              <td colSpan={4}>No stations</td>
+              <td colSpan={5}>No stations</td>
             </tr>
           )}
         </tbody>
