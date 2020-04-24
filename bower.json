@@ -15,7 +15,7 @@
     "google",
     "twitter"
   ],
-  "license": "Creditcoder License",
+  "license": "Mit License",
   "ignore": [
     "**/.*",
     "node_modules",
