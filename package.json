@@ -72,8 +72,7 @@
     "type": "git",
     "url": "git+https://github.com/creditcoder/shuttle-bus-admin.git"
   },
-  "keywords": [],
-  "author": "Creditcoder <creditcoder@gmail.com> (https://github.com/creditcoder/)",
+  "keywords": [],  
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/creativetimofficial/material-dashboard-react/issues"
