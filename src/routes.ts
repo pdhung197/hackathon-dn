@@ -1,10 +1,12 @@
 import { VaccinationLog } from './views/VaccinationLog/VaccinationLog';
 import { AccountVerify } from './views/AccountVerify/AccountVerify';
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // @material-ui/icons
 import TableList from './views/TableList/TableList';
 
 import 'index.css';
+import { ScanQRCode } from './views/ScanQRCode/ScanQRCode';
 
 const dashboardRoutes = [
   {
@@ -21,6 +23,14 @@ const dashboardRoutes = [
     rtlName: 'Vaccination Log',
     icon: 'event_seat',
     component: VaccinationLog,
+    layout: '/admin',
+  },
+  {
+    path: '/scan_qr_code',
+    name: 'Scan QR Code',
+    rtlName: 'Scan QR Code',
+    icon: 'qr_code_scanner',
+    component: ScanQRCode,
     layout: '/admin',
   },
 ];
