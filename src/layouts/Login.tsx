@@ -1,22 +1,22 @@
-import React, { useState, ReactElement } from 'react'
-import Avatar from '@material-ui/core/Avatar'
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '@material-ui/core/TextField'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
-import Link from '@material-ui/core/Link'
-import Paper from '@material-ui/core/Paper'
-import Box from '@material-ui/core/Box'
-import Grid from '@material-ui/core/Grid'
-import DirectionsBusIcon from '@material-ui/icons/DirectionsBus'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
+import React, { useState, ReactElement } from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import DirectionsBusIcon from '@material-ui/icons/DirectionsBus';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
 /* import { AuthContext } from '../index' */
 
-import firebase from '../firebase'
-import { withRouter } from 'react-router-dom'
+import firebase from '../firebase';
+import { withRouter } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -28,7 +28,7 @@ function Copyright() {
       {new Date().getFullYear()}
       {'.'}
     </Typography>
-  )
+  );
 }
 
 const useStyles = makeStyles(theme => ({
@@ -62,40 +62,48 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}))
+}));
 
 const Login = ({ history }: any): ReactElement => {
-  const classes = useStyles()
+  const classes = useStyles();
 
-  const [email, setEmail] = useState('pdhung.info@gmail.com')
-  const [password, setPassword] = useState('pdhung')
-  const [error, setErrors] = useState('')
+  const [email, setEmail] = useState('pdhung.info@gmail.com');
+  const [password, setPassword] = useState('pdhung');
+  const [error, setErrors] = useState('');
 
   /* const Auth = useContext(AuthContext) */
   const handleForm = (e: any): void => {
-    e.preventDefault()
+    e.preventDefault();
     // history.replace('admin')
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(res => {
-        console.log({ res })
+        console.log({ res });
         if (res.user) {
           // Auth.setLoggedIn(true)
-          history.replace('admin')
+          history.replace('admin');
         }
       })
-      .catch(e => {
-        console.log({ e })
-        setErrors(e.message)
-      })
-  }
+      .catch(err => {
+        console.log({ err });
+        setErrors(err.message);
+      });
+  };
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container={true} component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item={true} xs={false} sm={4} md={7} className={classes.image} />
+      <Grid
+        item={true}
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square={true}
+      >
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <DirectionsBusIcon />
@@ -103,25 +111,25 @@ const Login = ({ history }: any): ReactElement => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate={true}>
             <TextField
               variant="outlined"
               margin="normal"
-              required
-              fullWidth
+              required={true}
+              fullWidth={true}
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
+              autoFocus={true}
               value={email}
               onChange={e => setEmail(e.target.value)}
             />
             <TextField
               variant="outlined"
               margin="normal"
-              required
-              fullWidth
+              required={true}
+              fullWidth={true}
               name="password"
               label="Password"
               type="password"
@@ -135,7 +143,7 @@ const Login = ({ history }: any): ReactElement => {
               label="Remember me"
             />
             <Button
-              fullWidth
+              fullWidth={true}
               variant="contained"
               color="primary"
               onClick={e => handleForm(e)}
@@ -143,13 +151,13 @@ const Login = ({ history }: any): ReactElement => {
               Sign in
             </Button>
             <span>{error}</span>
-            <Grid container>
-              <Grid item xs>
+            <Grid container={true}>
+              <Grid item={true} xs={true}>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
-              <Grid item>
+              <Grid item={true}>
                 <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
@@ -162,7 +170,7 @@ const Login = ({ history }: any): ReactElement => {
         </div>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default withRouter(Login)
+export default withRouter(Login);
