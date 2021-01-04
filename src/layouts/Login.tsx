@@ -1,4 +1,4 @@
-import React, { useState, useContext, ReactElement } from 'react'
+import React, { useState, ReactElement } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -9,12 +9,11 @@ import Link from '@material-ui/core/Link'
 import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import DirectionsBusIcon from '@material-ui/icons/DirectionsBus'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { AuthContext } from '../index'
+/* import { AuthContext } from '../index' */
 
 import firebase from '../firebase'
 import { withRouter } from 'react-router-dom'
@@ -68,23 +67,26 @@ const useStyles = makeStyles(theme => ({
 const Login = ({ history }: any): ReactElement => {
   const classes = useStyles()
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('pdhung.info@gmail.com')
+  const [password, setPassword] = useState('pdhung')
   const [error, setErrors] = useState('')
 
-  const Auth = useContext(AuthContext)
+  /* const Auth = useContext(AuthContext) */
   const handleForm = (e: any): void => {
     e.preventDefault()
+    // history.replace('admin')
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(res => {
+        console.log({ res })
         if (res.user) {
           // Auth.setLoggedIn(true)
           history.replace('admin')
         }
       })
       .catch(e => {
+        console.log({ e })
         setErrors(e.message)
       })
   }

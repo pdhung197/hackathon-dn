@@ -86,7 +86,7 @@ function FirebaseFileUploadApi(): [
     }
 
     fileData && uploadData()
-  }, [fileData])
+  }, [dirName, fileData])
 
   return [{ data, isLoading, isError, progress }, setDirName, setFileData]
 }

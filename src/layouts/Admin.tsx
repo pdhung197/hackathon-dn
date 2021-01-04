@@ -1,23 +1,15 @@
-import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import PerfectScrollbar from 'perfect-scrollbar'
-import 'perfect-scrollbar/css/perfect-scrollbar.css'
-import { makeStyles } from '@material-ui/core/styles'
-import Navbar from '../components/Navbars/Navbar'
-import Footer from '../components/Footer/Footer'
-import Sidebar from '../components/Sidebar/Sidebar'
-import FixedPlugin from '../components/FixedPlugin/FixedPlugin'
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-import routes from '../routes'
+import 'perfect-scrollbar/css/perfect-scrollbar.css';
+import { makeStyles } from '@material-ui/core/styles';
+import Sidebar from '../components/Sidebar/Sidebar';
 
-import dashboardStyle from '../assets/jss/material-dashboard-react/layouts/dashboardStyle'
-import styles from '../assets/jss/material-dashboard-react/layouts/adminStyle'
-import logo from 'assets/img/reactlogo.png'
-import { withRouter } from 'react-router-dom'
-import bgImage from 'assets/img/sidebar-2.jpg'
+import routes from '../routes';
 
-import image from 'assets/img/sidebar-2.jpg'
-let ps: any = undefined
+import dashboardStyle from '../assets/jss/material-dashboard-react/layouts/dashboardStyle';
+import logo from 'assets/img/reactlogo.png';
+import image from 'assets/img/sidebar-2.jpg';
 
 const switchRoutes = (
   <Switch>
@@ -29,74 +21,34 @@ const switchRoutes = (
             component={prop.component}
             key={key}
           />
-        )
+        );
       }
-      return null
+      return null;
     })}
-    <Redirect from="/admin" to="/admin/trips/list" />
+    <Redirect from="/admin" to="/admin/tables" />
   </Switch>
-)
+);
 
-const useStyles = makeStyles(dashboardStyle)
+const useStyles = makeStyles(dashboardStyle);
 
 export default function Admin({ ...rest }) {
-  // styles
-  const classes = useStyles()
-  // ref to help us initialize PerfectScrollbar on windows devices
-  const mainPanel = React.createRef()
-  // states and functions
-  const [image, setImage] = React.useState(bgImage)
-  const [color, setColor] = React.useState('blue')
-  const [fixedClasses, setFixedClasses] = React.useState('dropdown show')
-  const [mobileOpen, setMobileOpen] = React.useState(false)
+  const classes = useStyles();
 
-  const handleImageClick = (image: string): void => {
-    setImage(image)
-  }
-  const handleColorClick = (color: string): void => {
-    setColor(color)
-  }
-  const handleFixedClick = () => {
-    if (fixedClasses === 'dropdown') {
-      setFixedClasses('dropdown show')
-    } else {
-      setFixedClasses('dropdown')
-    }
-  }
+  const [color] = React.useState('blue');
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen)
-  }
+    setMobileOpen(!mobileOpen);
+  };
   const getRoute = () => {
-    return window.location.pathname !== '/admin/maps'
-  }
-  const resizeFunction = () => {
-    if (window.innerWidth >= 960) {
-      setMobileOpen(false)
-    }
-  }
-  // initialize and destroy the PerfectScrollbar plugin
-  React.useEffect(() => {
-    // if (navigator.platform.indexOf('Win') > -1) {
-    //   ps = new PerfectScrollbar(mainPanel.current, {
-    //     suppressScrollX: true,
-    //     suppressScrollY: false,
-    //   })
-    //   document.body.style.overflow = 'hidden'
-    // }
-    // window.addEventListener('resize', resizeFunction)
-    // // Specify how to clean up after this effect:
-    // return function cleanup() {
-    //   if (navigator.platform.indexOf('Win') > -1) {
-    //     ps.destroy()
-    //   }
-    //   window.removeEventListener('resize', resizeFunction)
-    // }
-  }, [mainPanel])
+    return window.location.pathname !== '/admin/maps';
+  };
+
   return (
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={'Shuttle Bus'}
+        logoText={'Animals'}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
@@ -104,13 +56,7 @@ export default function Admin({ ...rest }) {
         color={color}
         {...rest}
       />
-      <div className={classes.mainPanel} /*ref={mainPanel}*/>
-        {/* <Navbar
-                    routes={routes}
-                    handleDrawerToggle={handleDrawerToggle}
-                    {...rest}
-                /> */}
-        {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
+      <div className={classes.mainPanel}>
         {getRoute() ? (
           <div className={classes.content}>
             <div className={classes.container}>{switchRoutes}</div>
@@ -118,18 +64,7 @@ export default function Admin({ ...rest }) {
         ) : (
           <div className={classes.map}>{switchRoutes}</div>
         )}
-        {/* {getRoute() ? <Footer /> : null} */}
-        {/* <FixedPlugin
-          handleImageClick={handleImageClick}
-          handleColorClick={handleColorClick}
-          bgColor={color}
-          bgImage={image}
-          handleFixedClick={handleFixedClick}
-          fixedClasses={fixedClasses}
-        /> */}
       </div>
     </div>
-  )
+  );
 }
-
-// export default withRouter(Admin);

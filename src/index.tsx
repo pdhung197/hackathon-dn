@@ -1,36 +1,35 @@
-import React, { useState, useEffect } from 'react'
-import ReactDOM from 'react-dom'
-import { createBrowserHistory } from 'history'
-import { Router, Route, Switch, Redirect } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import { createBrowserHistory } from 'history';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import Admin from './layouts/Admin'
-import Login from './layouts/Login'
-import Register from './layouts/Register'
-import RTL from './layouts/RTL'
+import Admin from './layouts/Admin';
+import Login from './layouts/Login';
+import Register from './layouts/Register';
 
-import 'assets/css/material-dashboard-react.css?v=1.8.0'
+import 'assets/css/material-dashboard-react.css?v=1.8.0';
 
-import firebase, { config } from './firebase'
-export const AuthContext = React.createContext({})
+import { config } from './firebase';
+export const AuthContext = React.createContext({});
 
 function App() {
-  const hist = createBrowserHistory()
-  const [isLoggedIn, setLoggedIn] = useState(false)
+  const hist = createBrowserHistory();
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   function readSession() {
     const user = window.sessionStorage.getItem(
       `firebase:authUser:${config.apiKey}:[DEFAULT]`,
-    )
+    );
     if (user) {
-      setLoggedIn(true)
-      console.log('login success', user)
+      setLoggedIn(true);
+      console.log('login success', user);
     } else {
-      console.log('login failed')
+      console.log('login failed');
     }
   }
   useEffect(() => {
-    readSession()
-  }, [])
+    readSession();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
@@ -43,8 +42,8 @@ function App() {
         </Switch>
       </Router>
     </AuthContext.Provider>
-  )
+  );
 }
 
-const rootElement = document.getElementById('root')
-ReactDOM.render(<App />, rootElement)
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App />, rootElement);
