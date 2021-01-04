@@ -1,5 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+const TempScan = () => {
+  return <div>Temporary Scan component</div>;
+};
 
 export const VaccinationLog = () => {
-  return <div>Đây là trang log Vaccination</div>;
+  const [qrData, setQrData] = useState('');
+
+  if (!qrData || !qrData.length) {
+    return (
+      <div>
+        <TempScan />
+      </div>
+    );
+  }
+
+  return <div>Has data</div>;
 };
