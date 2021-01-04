@@ -10,6 +10,7 @@ import Register from './layouts/Register';
 import 'assets/css/material-dashboard-react.css?v=1.8.0';
 
 import { config } from './firebase';
+import { Proof } from './views/Proof/Proof';
 export const AuthContext = React.createContext({});
 
 function App() {
@@ -37,8 +38,9 @@ function App() {
         <Switch>
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
+          <Route path="/proof" component={Proof} />
           <Route path="/admin" component={Admin} />
-          <Redirect from="/" to="/login" />
+          <Redirect from="/" to="/proof" />
         </Switch>
       </Router>
     </AuthContext.Provider>

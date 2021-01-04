@@ -25,7 +25,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/admin" to="/admin/tables" />
+    <Redirect from="/admin" to="/admin/verify" />
   </Switch>
 );
 
