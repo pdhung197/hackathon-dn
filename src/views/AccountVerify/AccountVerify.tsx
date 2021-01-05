@@ -2,7 +2,9 @@ import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Profile } from '../../components/Profile/Profile';
+import { ProfileModel, ProfileStatus } from '../../helpers/models/Patient';
 import { getPatient } from '../../utils/api/patient/getPatient';
+import { updatePatientStatus } from '../../utils/api/patient/updatePatientStatus';
 import { ScanQRCode } from '../ScanQRCode/ScanQRCode';
 
 const VerifyContainer = styled.div`
@@ -15,7 +17,7 @@ const QRContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-const exUser: Profile = {
+const exUser: ProfileModel = {
   id: 0,
   full_name: 'Hung Phan',
   personal_id: '201761488',
@@ -36,14 +38,17 @@ const exUser: Profile = {
   remind_second_vaccinate_date_time: '2021-01-04T22:13:20.595Z',
   second_vaccinate_date_time: '2021-01-04T22:13:20.595Z',
   second_vaccinate_description: '2021-01-04T22:13:20.595Z',
-  status: 'Registered',
+  status: 'FinishFirstTime',
 };
 
 export const AccountVerify = () => {
-  const [profile, setProfile] = useState<Profile>((null as unknown) as Profile);
+  const userRole = 'admin';
+  const [profile, setProfile] = useState<ProfileModel>(
+    (null as unknown) as ProfileModel,
+  );
 
   const handleScanOther = () => {
-    setProfile((null as unknown) as Profile);
+    setProfile((null as unknown) as ProfileModel);
   };
 
   const handleScanQrCode = async (result: string) => {
@@ -52,6 +57,14 @@ export const AccountVerify = () => {
       setProfile(profileData);
     }
   };
+
+  const handleUpdatePatientStatus = async (status: ProfileStatus) => {
+    const update = await updatePatientStatus(status, profile.q_r_code);
+    if (update) {
+      handleScanQrCode(profile.q_r_code);
+    }
+  };
+
   return (
     <div>
       {profile ? (
@@ -64,7 +77,12 @@ export const AccountVerify = () => {
             >
               Scan other
             </Button>
-            <Profile profile={profile} role="admin" title="Patient Profile" />
+            <Profile
+              profile={profile}
+              role={userRole}
+              title="Patient Profile"
+              onStatusChange={handleUpdatePatientStatus}
+            />
           </VerifyContainer>
         </>
       ) : (

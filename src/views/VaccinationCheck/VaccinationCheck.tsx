@@ -6,6 +6,7 @@ import { ScanQRCode } from '../ScanQRCode/ScanQRCode';
 import restClient from '../../services/rest-client';
 import { get, split } from 'lodash';
 import AprrovalIcon from '../../assets/img/approval.png';
+import { ProfileModel } from '../../helpers/models/Patient';
 
 const VerifyContainer = styled.div`
   text-align: right;
@@ -24,7 +25,9 @@ export const VaccinationCheck = ({
   match: any;
   location: any;
 }) => {
-  const [profile, setProfile] = useState<Profile>((null as unknown) as Profile);
+  const [profile, setProfile] = useState<ProfileModel>(
+    (null as unknown) as ProfileModel,
+  );
   const [qrCode, setQrCode] = useState<string | undefined>();
   const [loaded, setLoaded] = useState<boolean>(false);
 
@@ -38,8 +41,9 @@ export const VaccinationCheck = ({
   }, [location]);
 
   const handleScanOther = () => {
-    setProfile((null as unknown) as Profile);
+    setProfile((null as unknown) as ProfileModel);
     setQrCode(undefined);
+    setProfile((null as unknown) as ProfileModel);
   };
 
   const handleScanQrCode = async (result: string) => {
@@ -107,7 +111,7 @@ export const VaccinationCheck = ({
                 margin: 15,
               }}
             >
-              <Profile profile={profile} role="viewer" title="Detail" />
+              <Profile profile={profile} title="Detail" />
             </div>
           </VerifyContainer>
         </>

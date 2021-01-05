@@ -31,8 +31,7 @@ export const ScanQRCode = ({ onScanned, size }: ScanQRCodeProps) => {
 
   useEffect(() => {
     if (result && onScanned) {
-      console.log({ result });
-      onScanned(result);
+      onScanned((result || '').split('=').pop() || '');
     }
   }, [onScanned, result]);
 

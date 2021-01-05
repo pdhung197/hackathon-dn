@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const restClient = axios.create({
-  baseURL: 'http://27.71.235.200:8888',
+  baseURL: 'https://covidverify.xyz',
   timeout: 10000,
 });
 
