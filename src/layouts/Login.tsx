@@ -52,7 +52,7 @@ const Login = (): ReactElement => {
       .then(res => {
         if (res.data.token) {
           Auth.setAuthData(res.data.token);
-          history.push('/admin');
+          history.replace('/admin/verify');
         }
       })
       .catch(error => {
