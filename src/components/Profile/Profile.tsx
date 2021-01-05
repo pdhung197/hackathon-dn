@@ -27,7 +27,7 @@ const TitleContainer = styled(Grid)`
   button {
     position: absolute;
     right: 10px;
-    top: 20px;
+    top: 10px;
   }
 `;
 
@@ -139,7 +139,7 @@ export const Profile = ({
   } = profile;
 
   return (
-    <ProfileContainer container={true} spacing={5}>
+    <ProfileContainer container={true} spacing={3}>
       <TitleContainer item={true} xs={12}>
         <h4>{title}</h4>
         <Button variant="contained" color="secondary" onClick={handleScanOther}>
@@ -149,7 +149,7 @@ export const Profile = ({
       <ProfileInfoContainer
         container={true}
         xs={12}
-        spacing={5}
+        spacing={3}
         direction={role ? 'row' : 'column'}
         style={{
           alignItems: role ? 'flex-start' : 'center',
@@ -160,7 +160,7 @@ export const Profile = ({
           container={true}
           xs={12}
           sm={role ? 4 : 12}
-          spacing={3}
+          spacing={2}
         >
           <Grid item={true} xs={12}>
             <ProfileImageContainer>
@@ -190,7 +190,7 @@ export const Profile = ({
             </QRCodeContainer>
           </Grid>
         </ProfileInfo>
-        <ProfileInfo item={true} container={true} xs={12} sm={8} spacing={3}>
+        <ProfileInfo item={true} container={true} xs={12} sm={8} spacing={2}>
           <Grid item={true} xs={12} sm={role ? 4 : 6}>
             <ProfileLabel>Full name</ProfileLabel>
           </Grid>
