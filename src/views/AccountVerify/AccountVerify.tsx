@@ -2,6 +2,7 @@ import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Profile } from '../../components/Profile/Profile';
+import { getPatient } from '../../utils/api/patient/getPatient';
 import { ScanQRCode } from '../ScanQRCode/ScanQRCode';
 
 const VerifyContainer = styled.div`
@@ -39,15 +40,17 @@ const exUser: Profile = {
 };
 
 export const AccountVerify = () => {
-  const [profile, setProfile] = useState<Profile>(exUser);
+  const [profile, setProfile] = useState<Profile>((null as unknown) as Profile);
 
   const handleScanOther = () => {
     setProfile((null as unknown) as Profile);
   };
 
-  const handleScanQrCode = (result: string) => {
-    console.log({ result });
-    setProfile(exUser);
+  const handleScanQrCode = async (result: string) => {
+    const profileData = await getPatient(result);
+    if (profileData) {
+      setProfile(profileData);
+    }
   };
   return (
     <div>
