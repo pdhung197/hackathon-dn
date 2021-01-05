@@ -28,9 +28,7 @@ export const VaccinationCheck = ({
   const [profile, setProfile] = useState<ProfileModel>(
     (null as unknown) as ProfileModel,
   );
-  const [qrCode, setQrCode] = useState<string | undefined>(
-    '4890fec0-c829-4be9-a08b-7b451f027366',
-  );
+  const [qrCode, setQrCode] = useState<string | undefined>();
   const [loaded, setLoaded] = useState<boolean>(false);
 
   useEffect(() => {
@@ -112,7 +110,7 @@ export const VaccinationCheck = ({
                 margin: 15,
               }}
             >
-              <Profile profile={profile} title="Detail" />
+              <Profile profile={profile} title="Customer Detail" />
             </div>
           </VerifyContainer>
         </>
