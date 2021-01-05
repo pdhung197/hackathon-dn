@@ -66,6 +66,8 @@ export const VaccinationCheck = ({
           }
         })
         .finally(() => setLoaded(true));
+    } else {
+      setLoaded(true);
     }
   }, [qrCode]);
 
