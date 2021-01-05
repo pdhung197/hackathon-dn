@@ -1,0 +1,101 @@
+import { Button, Typography } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { Profile } from '../../components/Profile/Profile';
+import { ScanQRCode } from '../ScanQRCode/ScanQRCode';
+import restClient from '../../services/rest-client';
+import { useLocation } from 'react-router-dom';
+import { split } from 'lodash';
+
+const VerifyContainer = styled.div`
+  text-align: right;
+`;
+
+const QRContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+`;
+
+export const VaccinationCheck = ({
+  match,
+  location,
+}: {
+  match: any;
+  location: any;
+}) => {
+  const [profile, setProfile] = useState<Profile>((null as unknown) as Profile);
+  const [qrCode, setQrCode] = useState<string | undefined>();
+
+  useEffect(() => {
+    if (location && location.search) {
+      const code = split(location.search, '=')[1];
+      if (code) {
+        setQrCode(code);
+      }
+    }
+  }, [location]);
+
+  const handleScanOther = () => {
+    setProfile((null as unknown) as Profile);
+  };
+
+  const handleScanQrCode = async (result: string) => {
+    setQrCode(result);
+    if (result) {
+      const code = split(result, '=')[1];
+      if (code) {
+        setQrCode(code);
+      }
+    }
+  };
+
+  useEffect(() => {
+    restClient
+      .get('/api/vistors/profile', {
+        params: {
+          qr: qrCode,
+        },
+      })
+      .then(resp => {
+        if (resp.status === 200) {
+          setProfile(resp.data);
+        }
+      });
+  }, [qrCode]);
+
+  console.log('qrCode', qrCode);
+
+  return (
+    <div>
+      <Typography
+        component="h1"
+        variant="h5"
+        style={{ textAlign: 'center', margin: 20 }}
+      >
+        Vaccination Check
+      </Typography>
+      {profile ? (
+        <>
+          <VerifyContainer>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleScanOther}
+            >
+              Scan
+            </Button>
+            <Profile profile={profile} role="viewer" title="Detail" />
+          </VerifyContainer>
+        </>
+      ) : (
+        <QRContainer>
+          <ScanQRCode
+            onScanned={handleScanQrCode}
+            size={{ width: 600, height: 600 }}
+          />
+        </QRContainer>
+      )}
+    </div>
+  );
+};
