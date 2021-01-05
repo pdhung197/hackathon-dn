@@ -71,7 +71,7 @@ enum StatusLabel {
 
 type ProfileProps = {
   profile: ProfileModel;
-  role: 'admin' | 'assistant' | 'nurse' | undefined;
+  role?: 'admin' | 'assistant' | 'nurse' | undefined;
   title: string;
   onStatusChange?: (status: ProfileStatus) => void;
 };
@@ -110,7 +110,7 @@ export const Profile = ({
     valid,
     status = 'Registered',
   } = profile;
-  console.log({ q_r_code });
+  console.log({ role });
   return (
     <ProfileContainer container={true} spacing={5}>
       <TitleContainer item={true} xs={12}>
@@ -150,46 +150,55 @@ export const Profile = ({
         <Grid item={true} xs={12} sm={8}>
           {dayjs(birthday).format('DD/MM/YYYY')}
         </Grid>
-        <Grid item={true} xs={12} sm={4}>
-          <ProfileLabel>Gender</ProfileLabel>
-        </Grid>
-        <Grid item={true} xs={12} sm={8}>
-          {sex}
-        </Grid>
+        {role && (
+          <>
+            <Grid item={true} xs={12} sm={4}>
+              <ProfileLabel>Gender</ProfileLabel>
+            </Grid>
+            <Grid item={true} xs={12} sm={8}>
+              {sex}
+            </Grid>
+          </>
+        )}
+
         <Grid item={true} xs={12} sm={4}>
           <ProfileLabel>Personal Id</ProfileLabel>
         </Grid>
         <Grid item={true} xs={12} sm={8}>
           {personal_id}
         </Grid>
-        <Grid item={true} xs={12} sm={4}>
-          <ProfileLabel>Address</ProfileLabel>
-        </Grid>
-        <Grid item={true} xs={12} sm={8}>
-          {address}
-        </Grid>
-        <Grid item={true} xs={12} sm={4}>
-          <ProfileLabel>Phone number</ProfileLabel>
-        </Grid>
-        <Grid item={true} xs={12} sm={8}>
-          {phone}
-        </Grid>
-        <Grid item={true} xs={12} sm={4}>
-          <ProfileLabel>Email</ProfileLabel>
-        </Grid>
-        <Grid item={true} xs={12} sm={8}>
-          <a href={`mailto:${email}`}>{email}</a>
-        </Grid>
-        {role && getLabelByStatus(status) && (
-          <Grid item={true} xs={12}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => onStatusChange(status)}
-            >
-              {getLabelByStatus(status)}
-            </Button>
-          </Grid>
+        {role && (
+          <>
+            <Grid item={true} xs={12} sm={4}>
+              <ProfileLabel>Address</ProfileLabel>
+            </Grid>
+            <Grid item={true} xs={12} sm={8}>
+              {address}
+            </Grid>
+            <Grid item={true} xs={12} sm={4}>
+              <ProfileLabel>Phone number</ProfileLabel>
+            </Grid>
+            <Grid item={true} xs={12} sm={8}>
+              {phone}
+            </Grid>
+            <Grid item={true} xs={12} sm={4}>
+              <ProfileLabel>Email</ProfileLabel>
+            </Grid>
+            <Grid item={true} xs={12} sm={8}>
+              <a href={`mailto:${email}`}>{email}</a>
+            </Grid>
+            {getLabelByStatus(status) && (
+              <Grid item={true} xs={12}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => onStatusChange(status)}
+                >
+                  {getLabelByStatus(status)}
+                </Button>
+              </Grid>
+            )}
+          </>
         )}
       </ProfileInfo>
     </ProfileContainer>

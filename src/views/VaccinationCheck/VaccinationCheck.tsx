@@ -111,7 +111,7 @@ export const VaccinationCheck = ({
                 margin: 15,
               }}
             >
-              <Profile profile={profile} role="assistant" title="Detail" />
+              <Profile profile={profile} title="Detail" />
             </div>
           </VerifyContainer>
         </>
