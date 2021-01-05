@@ -1,29 +1,26 @@
-import React, { useState, ReactElement } from 'react';
-import Avatar from '@material-ui/core/Avatar';
+import React, { useState, ReactElement, useContext } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import DirectionsBusIcon from '@material-ui/icons/DirectionsBus';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-
-/* import { AuthContext } from '../index' */
-
-import firebase from '../firebase';
-import { withRouter } from 'react-router-dom';
+import { AuthContext } from '../index';
+import { useHistory, withRouter } from 'react-router-dom';
+import restClient from '../services/rest-client';
+import { get } from 'lodash';
+import bgImage from '../assets/img/login-bg.jpg';
+import logoOwt from '../assets/img/owt-logo.svg';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="#">
-        Your Website
+        Open Web Technology
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -31,12 +28,108 @@ function Copyright() {
   );
 }
 
+const Login = (): ReactElement => {
+  const classes = useStyles();
+  const history = useHistory();
+  const Auth = useContext(AuthContext);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleForm = (e: any): void => {
+    e.preventDefault();
+
+    if (!email || !password) {
+      return;
+    }
+
+    restClient
+      .post('/api/auth', {
+        username: email,
+        password,
+      })
+      .then(res => {
+        if (res.data.token) {
+          Auth.setAuthData(res.data.token);
+          history.replace('/admin/verify');
+        }
+      })
+      .catch(error => {
+        const errMsg = get(error, 'response.data');
+        errMsg && setError(errMsg);
+      });
+  };
+
+  return (
+    <Grid container={true} component="main" className={classes.root}>
+      <CssBaseline />
+      <Grid item={true} xs={false} sm={4} md={7} className={classes.image} />
+      <Grid
+        item={true}
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square={true}
+      >
+        <div className={classes.paper}>
+          <img src={logoOwt} alt="owt" />
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form className={classes.form} noValidate={true}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              placeholder="Username"
+              name="username"
+              autoFocus
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required={true}
+              fullWidth={true}
+              name="password"
+              placeholder="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+            <p className={classes.error}>{error}</p>
+            <Button
+              fullWidth={true}
+              variant="contained"
+              color="primary"
+              onClick={e => handleForm(e)}
+            >
+              Sign in
+            </Button>
+            <Box mt={5}>
+              <Copyright />
+            </Box>
+          </form>
+        </div>
+      </Grid>
+    </Grid>
+  );
+};
+
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage: `url(${bgImage})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'dark'
@@ -62,115 +155,11 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  error: {
+    color: '#ef4444',
+    margin: 20,
+    textAlign: 'center',
+  },
 }));
-
-const Login = ({ history }: any): ReactElement => {
-  const classes = useStyles();
-
-  const [email, setEmail] = useState('pdhung.info@gmail.com');
-  const [password, setPassword] = useState('pdhung');
-  const [error, setErrors] = useState('');
-
-  /* const Auth = useContext(AuthContext) */
-  const handleForm = (e: any): void => {
-    e.preventDefault();
-    // history.replace('admin')
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(res => {
-        console.log({ res });
-        if (res.user) {
-          // Auth.setLoggedIn(true)
-          history.replace('admin');
-        }
-      })
-      .catch(err => {
-        console.log({ err });
-        setErrors(err.message);
-      });
-  };
-
-  return (
-    <Grid container={true} component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item={true} xs={false} sm={4} md={7} className={classes.image} />
-      <Grid
-        item={true}
-        xs={12}
-        sm={8}
-        md={5}
-        component={Paper}
-        elevation={6}
-        square={true}
-      >
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <DirectionsBusIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form className={classes.form} noValidate={true}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required={true}
-              fullWidth={true}
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus={true}
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required={true}
-              fullWidth={true}
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              fullWidth={true}
-              variant="contained"
-              color="primary"
-              onClick={e => handleForm(e)}
-            >
-              Sign in
-            </Button>
-            <span>{error}</span>
-            <Grid container={true}>
-              <Grid item={true} xs={true}>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item={true}>
-                <Link href="/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
-          </form>
-        </div>
-      </Grid>
-    </Grid>
-  );
-};
 
 export default withRouter(Login);

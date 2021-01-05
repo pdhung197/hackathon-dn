@@ -11,11 +11,21 @@ import 'assets/css/material-dashboard-react.css?v=1.8.0';
 
 import { config } from './firebase';
 import { Proof } from './views/Proof/Proof';
-export const AuthContext = React.createContext({});
+
+interface IAuthContext {
+  isLoggedIn: boolean;
+  setAuthData: (token: string) => void;
+}
+
+export const AuthContext = React.createContext<IAuthContext>({
+  isLoggedIn: false,
+  setAuthData: () => {},
+});
 
 function App() {
   const hist = createBrowserHistory();
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [authToken, setAuthToken] = useState<string>();
 
   function readSession() {
     const user = window.sessionStorage.getItem(
@@ -32,8 +42,15 @@ function App() {
     readSession();
   }, []);
 
+  const setAuthData = (token: string) => {
+    setLoggedIn(true);
+    setAuthToken(token);
+  };
+
+  console.log({ isLoggedIn, authToken });
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+    <AuthContext.Provider value={{ isLoggedIn, setAuthData }}>
       <Router history={hist}>
         <Switch>
           <Route path="/register" component={Register} />
