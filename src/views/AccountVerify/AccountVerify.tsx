@@ -70,18 +70,12 @@ export const AccountVerify = () => {
       {profile ? (
         <>
           <VerifyContainer>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={handleScanOther}
-            >
-              Scan other
-            </Button>
             <Profile
               profile={profile}
               role={userRole}
               title="Patient Profile"
               onStatusChange={handleUpdatePatientStatus}
+              handleScanOther={handleScanOther}
             />
           </VerifyContainer>
         </>

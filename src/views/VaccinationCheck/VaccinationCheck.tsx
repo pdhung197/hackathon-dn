@@ -28,7 +28,9 @@ export const VaccinationCheck = ({
   const [profile, setProfile] = useState<ProfileModel>(
     (null as unknown) as ProfileModel,
   );
-  const [qrCode, setQrCode] = useState<string | undefined>();
+  const [qrCode, setQrCode] = useState<string | undefined>(
+    'c5a080ce-5334-4d19-b452-ea002b5be8d3',
+  );
   const [loaded, setLoaded] = useState<boolean>(false);
 
   useEffect(() => {
@@ -79,38 +81,19 @@ export const VaccinationCheck = ({
       maxWidth="md"
       style={{ backgroundColor: '#ffffff', padding: 20 }}
     >
-      <Typography
-        component="h1"
-        variant="h5"
-        style={{ textAlign: 'center', margin: 20 }}
-      >
-        Vaccination Check
-      </Typography>
       {profile && qrCode ? (
         <>
-          {get(profile, 'valid') && (
-            <div style={{ textAlign: 'center' }}>
-              <img
-                src={AprrovalIcon}
-                alt="approval"
-                style={{ width: 100, height: 100 }}
-              />
-            </div>
-          )}
           <VerifyContainer>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={handleScanOther}
-            >
-              Scan
-            </Button>
             <div
               style={{
                 margin: 15,
               }}
             >
-              <Profile profile={profile} title="Customer Detail" />
+              <Profile
+                profile={profile}
+                title="Customer Detail"
+                handleScanOther={handleScanOther}
+              />
             </div>
           </VerifyContainer>
         </>

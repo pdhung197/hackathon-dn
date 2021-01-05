@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Button, Grid } from '@material-ui/core';
 import { HImage } from '../HImage/HImage';
 import { ProfileModel, ProfileStatus } from '../../helpers/models/Patient';
+import AprrovalIcon from '../../assets/img/approval.png';
 
 const ProfileContainer = styled(Grid)`
   border: 1px solid gray;
@@ -15,11 +16,18 @@ const ProfileContainer = styled(Grid)`
 
 const TitleContainer = styled(Grid)`
   border-bottom: 1px solid gray;
+  position: relative;
 
   h4 {
     text-align: center;
     font-weight: 700;
     margin: 0;
+  }
+
+  button {
+    position: absolute;
+    right: 10px;
+    top: 20px;
   }
 `;
 
@@ -37,14 +45,21 @@ const ProfileLabel = styled.span`
 `;
 
 const ProfileImageContainer = styled.div`
-  overflow: hidden;
   text-align: center;
   max-height: 400px;
   max-width: 300px;
   margin: 0 auto;
+  position: relative;
 
   img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+
+    &.checked {
+      position: absolute;
+      top: calc(100% - 40px);
+      right: 10px;
+    }
   }
 `;
 
@@ -68,9 +83,9 @@ enum StatusLabelColor {
 
 enum StatusLabel {
   Registered = 'Registered',
-  Approval = 'Approved',
-  FinishFirstTime = 'Finish First Time',
-  Done = 'Finish',
+  Approval = 'Account Verified',
+  FinishFirstTime = 'Finished First Time',
+  Done = 'Vaccinated',
 }
 
 type ProfileProps = {
@@ -78,6 +93,7 @@ type ProfileProps = {
   role?: 'admin' | 'assistant' | 'nurse' | undefined;
   title: string;
   onStatusChange?: (status: ProfileStatus) => void;
+  handleScanOther?: () => void;
 };
 
 const getLabelByStatus = (status: ProfileStatus) => {
@@ -98,6 +114,7 @@ export const Profile = ({
   role,
   title = 'Patient Profile',
   onStatusChange = () => {},
+  handleScanOther = () => {},
 }: ProfileProps) => {
   const {
     full_name,
@@ -125,6 +142,9 @@ export const Profile = ({
     <ProfileContainer container={true} spacing={5}>
       <TitleContainer item={true} xs={12}>
         <h4>{title}</h4>
+        <Button variant="contained" color="secondary" onClick={handleScanOther}>
+          Scan other
+        </Button>
       </TitleContainer>
       <ProfileInfoContainer
         container={true}
@@ -145,6 +165,14 @@ export const Profile = ({
           <Grid item={true} xs={12}>
             <ProfileImageContainer>
               <HImage source={profile_url} title={full_name} />
+              {status === 'Done' && (
+                <img
+                  className="checked"
+                  src={AprrovalIcon}
+                  alt="approval"
+                  style={{ width: 50, height: 50 }}
+                />
+              )}
             </ProfileImageContainer>
           </Grid>
           <Grid item={true} xs={12}>
