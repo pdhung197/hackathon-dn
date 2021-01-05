@@ -3,6 +3,7 @@ import QRCode from 'qrcode.react';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { Button, Grid } from '@material-ui/core';
+import { HImage } from '../HImage/HImage';
 
 const ProfileContainer = styled(Grid)`
   border: 1px solid gray;
@@ -120,7 +121,7 @@ export const Profile = ({
       <ProfileInfo item={true} container={true} xs={12} sm={4} spacing={3}>
         <Grid item={true} xs={12}>
           <ProfileImageContainer>
-            <img src={profile_url} alt={full_name} />
+            <HImage source={profile_url} title={full_name} />
           </ProfileImageContainer>
         </Grid>
         <Grid item={true} xs={12}>
