@@ -40,7 +40,8 @@ const ProfileInfo = styled(Grid)`
   padding-bottom: 20px;
 `;
 
-const ProfileLabel = styled.span`
+const ProfileLabel = styled.p`
+  margin: 0;
   font-weight: 700;
 `;
 
@@ -192,13 +193,17 @@ export const Profile = ({
         </ProfileInfo>
         <ProfileInfo item={true} container={true} xs={12} sm={8} spacing={2}>
           <Grid item={true} xs={12} sm={role ? 4 : 6}>
-            <ProfileLabel>Full name</ProfileLabel>
+            <ProfileLabel style={{ textAlign: role ? 'start' : 'end' }}>
+              Full name
+            </ProfileLabel>
           </Grid>
           <Grid item={true} xs={12} sm={role ? 8 : 6}>
             {full_name}
           </Grid>
           <Grid item={true} xs={12} sm={role ? 4 : 6}>
-            <ProfileLabel>Date of birth</ProfileLabel>
+            <ProfileLabel style={{ textAlign: role ? 'start' : 'end' }}>
+              Date of birth
+            </ProfileLabel>
           </Grid>
           <Grid item={true} xs={12} sm={role ? 8 : 6}>
             {dayjs(birthday).format('DD/MM/YYYY')}
@@ -206,7 +211,9 @@ export const Profile = ({
           {role && (
             <>
               <Grid item={true} xs={12} sm={role ? 4 : 6}>
-                <ProfileLabel>Gender</ProfileLabel>
+                <ProfileLabel style={{ textAlign: role ? 'start' : 'end' }}>
+                  Gender
+                </ProfileLabel>
               </Grid>
               <Grid item={true} xs={12} sm={role ? 8 : 6}>
                 {sex}
@@ -215,7 +222,9 @@ export const Profile = ({
           )}
 
           <Grid item={true} xs={12} sm={role ? 4 : 6}>
-            <ProfileLabel>Personal Id</ProfileLabel>
+            <ProfileLabel style={{ textAlign: role ? 'start' : 'end' }}>
+              Personal Id
+            </ProfileLabel>
           </Grid>
           <Grid item={true} xs={12} sm={role ? 8 : 6}>
             {personal_id}
@@ -223,19 +232,25 @@ export const Profile = ({
           {role && (
             <>
               <Grid item={true} xs={12} sm={role ? 4 : 6}>
-                <ProfileLabel>Address</ProfileLabel>
+                <ProfileLabel style={{ textAlign: role ? 'start' : 'end' }}>
+                  Address
+                </ProfileLabel>
               </Grid>
               <Grid item={true} xs={12} sm={role ? 8 : 6}>
                 {address}
               </Grid>
               <Grid item={true} xs={12} sm={role ? 4 : 6}>
-                <ProfileLabel>Phone number</ProfileLabel>
+                <ProfileLabel style={{ textAlign: role ? 'start' : 'end' }}>
+                  Phone number
+                </ProfileLabel>
               </Grid>
               <Grid item={true} xs={12} sm={role ? 8 : 6}>
                 {phone}
               </Grid>
               <Grid item={true} xs={12} sm={role ? 4 : 6}>
-                <ProfileLabel>Email</ProfileLabel>
+                <ProfileLabel style={{ textAlign: role ? 'start' : 'end' }}>
+                  Email
+                </ProfileLabel>
               </Grid>
               <Grid item={true} xs={12} sm={role ? 8 : 6}>
                 <a href={`mailto:${email}`}>{email}</a>
@@ -246,7 +261,9 @@ export const Profile = ({
           {approval_date && (
             <>
               <Grid item={true} xs={12} sm={role ? 4 : 6}>
-                <ProfileLabel>Verify Date</ProfileLabel>
+                <ProfileLabel style={{ textAlign: role ? 'start' : 'end' }}>
+                  Verify Date
+                </ProfileLabel>
               </Grid>
               <Grid item={true} xs={12} sm={role ? 8 : 6}>
                 {dayjs(approval_date).format('DD/MM/YYYY HH:mm')}
@@ -257,14 +274,16 @@ export const Profile = ({
           {first_vaccinate_date_time && (
             <>
               <Grid item={true} xs={12} sm={role ? 4 : 6}>
-                <ProfileLabel>First Vaccinate Date</ProfileLabel>
+                <ProfileLabel style={{ textAlign: role ? 'start' : 'end' }}>
+                  First Vaccinate Date
+                </ProfileLabel>
               </Grid>
               <Grid item={true} xs={12} sm={role ? 8 : 6}>
                 {dayjs(first_vaccinate_date_time).format('DD/MM/YYYY HH:mm')}
               </Grid>
 
               {/* <Grid item={true} xs={12} sm={role ? 4 : 6}>
-                <ProfileLabel>First Vaccinate Note</ProfileLabel>
+                <ProfileLabel style={{ textAlign: role ? 'start' : 'end' }}>First Vaccinate Note</ProfileLabel>
               </Grid>
               <Grid item={true} xs={12} sm={role ? 8 : 6}>
                 {first_vaccinate_description || ''}
@@ -275,14 +294,16 @@ export const Profile = ({
           {second_vaccinate_date_time && (
             <>
               <Grid item={true} xs={12} sm={role ? 4 : 6}>
-                <ProfileLabel>Second Vaccinate Date</ProfileLabel>
+                <ProfileLabel style={{ textAlign: role ? 'start' : 'end' }}>
+                  Second Vaccinate Date
+                </ProfileLabel>
               </Grid>
               <Grid item={true} xs={12} sm={role ? 8 : 6}>
                 {dayjs(second_vaccinate_date_time).format('DD/MM/YYYY HH:mm')}
               </Grid>
 
               {/* <Grid item={true} xs={12} sm={role ? 4 : 6}>
-                <ProfileLabel>Second Vaccinate Note</ProfileLabel>
+                <ProfileLabel style={{ textAlign: role ? 'start' : 'end' }}>Second Vaccinate Note</ProfileLabel>
               </Grid>
               <Grid item={true} xs={12} sm={role ? 8 : 6}>
                 {second_vaccinate_description || ''}
