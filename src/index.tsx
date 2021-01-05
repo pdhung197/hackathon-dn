@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
@@ -9,54 +9,45 @@ import Register from './layouts/Register';
 
 import 'assets/css/material-dashboard-react.css?v=1.8.0';
 
-import { config } from './firebase';
 import { Proof } from './views/Proof/Proof';
+import restClient from './services/rest-client';
+import { VaccinationCheck } from './views/VaccinationCheck/VaccinationCheck';
 
 interface IAuthContext {
-  isLoggedIn: boolean;
+  isLoggedIn?: boolean;
   setAuthData: (token: string) => void;
+  token?: string;
 }
 
 export const AuthContext = React.createContext<IAuthContext>({
-  isLoggedIn: false,
   setAuthData: () => {},
 });
 
 function App() {
   const hist = createBrowserHistory();
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [authToken, setAuthToken] = useState<string>();
+
+  const setAuthData = (token: string) => {
+    restClient.defaults.headers.common.Authorization = `Bearer ${token}`;
+    window.localStorage.setItem('token', token);
+  };
 
   function readSession() {
-    const user = window.sessionStorage.getItem(
-      `firebase:authUser:${config.apiKey}:[DEFAULT]`,
-    );
-    if (user) {
-      setLoggedIn(true);
-      console.log('login success', user);
-    } else {
-      console.log('login failed');
-    }
+    const token = window.localStorage.getItem('token');
+    token && setAuthData(token);
   }
   useEffect(() => {
     readSession();
   }, []);
 
-  const setAuthData = (token: string) => {
-    setLoggedIn(true);
-    setAuthToken(token);
-  };
-
-  console.log({ isLoggedIn, authToken });
-
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setAuthData }}>
+    <AuthContext.Provider value={{ setAuthData }}>
       <Router history={hist}>
         <Switch>
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/proof" component={Proof} />
           <Route path="/admin" component={Admin} />
+          <Route path="/check" component={VaccinationCheck} />
           <Redirect from="/" to="/proof" />
         </Switch>
       </Router>
