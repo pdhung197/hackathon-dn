@@ -37,7 +37,7 @@ function App() {
   }
   useEffect(() => {
     readSession();
-  }, []);
+  }, [readSession]);
 
   return (
     <AuthContext.Provider value={{ setAuthData }}>
@@ -45,10 +45,9 @@ function App() {
         <Switch>
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route path="/proof" component={Proof} />
           <Route path="/admin" component={Admin} />
           <Route path="/check" component={VaccinationCheck} />
-          <Redirect from="/" to="/proof" />
+          <Redirect from="/" to="/login" />
         </Switch>
       </Router>
     </AuthContext.Provider>

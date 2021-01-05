@@ -17,22 +17,6 @@ const dashboardRoutes = [
     component: AccountVerify,
     layout: '/admin',
   },
-  {
-    path: '/logs',
-    name: 'Vaccination Log',
-    rtlName: 'Vaccination Log',
-    icon: 'event_seat',
-    component: VaccinationLog,
-    layout: '/admin',
-  },
-  {
-    path: '/scan_qr_code',
-    name: 'Scan QR Code',
-    rtlName: 'Scan QR Code',
-    icon: 'qr_code_scanner',
-    component: ScanQRCode,
-    layout: '/admin',
-  },
 ];
 
 export default dashboardRoutes;

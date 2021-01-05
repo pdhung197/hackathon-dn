@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { Button, Grid } from '@material-ui/core';
 import { HImage } from '../HImage/HImage';
+import { ProfileModel, ProfileStatus } from '../../helpers/models/Patient';
 
 const ProfileContainer = styled(Grid)`
   border: 1px solid gray;
@@ -34,6 +35,13 @@ const ProfileLabel = styled.span`
 const ProfileImageContainer = styled.div`
   overflow: hidden;
   text-align: center;
+  max-height: 400px;
+  max-width: 300px;
+  margin: 0 auto;
+
+  img {
+    width: 100%;
+  }
 `;
 
 const QRCodeContainer = styled.div`
@@ -41,7 +49,7 @@ const QRCodeContainer = styled.div`
   text-align: center;
 `;
 
-const StatusLabel = styled.p`
+const StatusLabelText = styled.p`
   margin: 0;
   text-align: center;
   font-weight: 700;
@@ -50,52 +58,42 @@ const StatusLabel = styled.p`
 enum StatusLabelColor {
   Registered = 'red',
   Approval = 'green',
-  FinishFirstTime = 'cyan',
+  FinishFirstTime = 'darkcyan',
   Done = 'blue',
 }
 
-export type ProfileStatus =
-  | 'Registered'
-  | 'Approval'
-  | 'FinishFirstTime'
-  | 'Done';
-
-export type Sex = 'Male' | 'Female' | 'Other';
-
-export type Profile = {
-  id: 0;
-  full_name: string;
-  personal_id: string;
-  email: string;
-  phone: string;
-  password: string;
-  q_r_code: string;
-  profile_url: string;
-  sex: Sex;
-  birthday: string;
-  address: string;
-  created_date: string;
-  approval_date: string;
-  valid: boolean;
-  remind_first_vaccinate_date_time: string;
-  first_vaccinate_date_time: string;
-  first_vaccinate_description: string;
-  remind_second_vaccinate_date_time: string;
-  second_vaccinate_date_time: string;
-  second_vaccinate_description: string;
-  status: ProfileStatus;
-};
+enum StatusLabel {
+  Registered = 'Registered',
+  Approval = 'Approved',
+  FinishFirstTime = 'Finish First Time',
+  Done = 'Finish',
+}
 
 type ProfileProps = {
-  profile: Profile;
-  role: 'admin' | 'assistant' | 'viewer';
+  profile: ProfileModel;
+  role: 'admin' | 'assistant' | 'nurse' | undefined;
   title: string;
+  onStatusChange?: (status: ProfileStatus) => void;
+};
+
+const getLabelByStatus = (status: ProfileStatus) => {
+  switch (status) {
+    case 'Registered':
+      return 'Approve account';
+    case 'Approval':
+      return 'Finish First Time';
+    case 'FinishFirstTime':
+      return 'Finish';
+    default:
+      return null;
+  }
 };
 
 export const Profile = ({
   profile,
   role,
   title = 'Patient Profile',
+  onStatusChange = () => {},
 }: ProfileProps) => {
   const {
     full_name,
@@ -112,7 +110,7 @@ export const Profile = ({
     valid,
     status = 'Registered',
   } = profile;
-
+  console.log({ q_r_code });
   return (
     <ProfileContainer container={true} spacing={5}>
       <TitleContainer item={true} xs={12}>
@@ -125,13 +123,13 @@ export const Profile = ({
           </ProfileImageContainer>
         </Grid>
         <Grid item={true} xs={12}>
-          <StatusLabel
+          <StatusLabelText
             style={{
               color: StatusLabelColor[status],
             }}
           >
-            {status.toUpperCase()}
-          </StatusLabel>
+            {StatusLabel[status].toUpperCase()}
+          </StatusLabelText>
         </Grid>
         <Grid item={true} xs={12}>
           <QRCodeContainer>
@@ -182,13 +180,17 @@ export const Profile = ({
         <Grid item={true} xs={12} sm={8}>
           <a href={`mailto:${email}`}>{email}</a>
         </Grid>
-        {status === 'Registered' ? (
+        {role && getLabelByStatus(status) && (
           <Grid item={true} xs={12}>
-            <Button variant="contained" color="primary">
-              Approve account
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => onStatusChange(status)}
+            >
+              {getLabelByStatus(status)}
             </Button>
           </Grid>
-        ) : null}
+        )}
       </ProfileInfo>
     </ProfileContainer>
   );

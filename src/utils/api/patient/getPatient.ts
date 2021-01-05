@@ -1,24 +1,15 @@
-import { callApi } from '../api';
-
-const url = 'http://27.71.235.200:8888/api/vistors/profile';
+import restClient from '../../../services/rest-client';
 
 export const getPatient = async (qr: string) => {
-  const onSuccess = (res: any) => {
-    const { data } = res;
-    return data;
-  };
-
-  const onFailure = (error: any) => {
-    console.log({ error: error.message.toString() });
+  try {
+    return await restClient
+      .get('api/profile', {
+        params: {
+          qr,
+        },
+      })
+      .then((res: any) => res.data);
+  } catch (error) {
     return null;
-  };
-
-  const configs = {
-    method: 'GET',
-    params: {
-      qr,
-    },
-  };
-
-  return await callApi(url, configs, undefined, onSuccess, onFailure);
+  }
 };
