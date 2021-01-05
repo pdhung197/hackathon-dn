@@ -1,11 +1,11 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button, Container, Typography } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Profile } from '../../components/Profile/Profile';
 import { ScanQRCode } from '../ScanQRCode/ScanQRCode';
 import restClient from '../../services/rest-client';
-import { useLocation } from 'react-router-dom';
-import { split } from 'lodash';
+import { get, split } from 'lodash';
+import AprrovalIcon from '../../assets/img/approval.png';
 
 const VerifyContainer = styled.div`
   text-align: right;
@@ -26,6 +26,7 @@ export const VaccinationCheck = ({
 }) => {
   const [profile, setProfile] = useState<Profile>((null as unknown) as Profile);
   const [qrCode, setQrCode] = useState<string | undefined>();
+  const [loaded, setLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     if (location && location.search) {
@@ -38,6 +39,7 @@ export const VaccinationCheck = ({
 
   const handleScanOther = () => {
     setProfile((null as unknown) as Profile);
+    setQrCode(undefined);
   };
 
   const handleScanQrCode = async (result: string) => {
@@ -51,23 +53,27 @@ export const VaccinationCheck = ({
   };
 
   useEffect(() => {
-    restClient
-      .get('/api/vistors/profile', {
-        params: {
-          qr: qrCode,
-        },
-      })
-      .then(resp => {
-        if (resp.status === 200) {
-          setProfile(resp.data);
-        }
-      });
+    if (qrCode) {
+      restClient
+        .get('/api/vistors/profile', {
+          params: {
+            qr: qrCode,
+          },
+        })
+        .then(resp => {
+          if (resp.status === 200) {
+            setProfile(resp.data);
+          }
+        })
+        .finally(() => setLoaded(true));
+    }
   }, [qrCode]);
 
-  console.log('qrCode', qrCode);
-
   return (
-    <div>
+    <Container
+      maxWidth="md"
+      style={{ backgroundColor: '#ffffff', padding: 20 }}
+    >
       <Typography
         component="h1"
         variant="h5"
@@ -75,8 +81,17 @@ export const VaccinationCheck = ({
       >
         Vaccination Check
       </Typography>
-      {profile ? (
+      {profile && qrCode ? (
         <>
+          {get(profile, 'valid') && (
+            <div style={{ textAlign: 'center' }}>
+              <img
+                src={AprrovalIcon}
+                alt="approval"
+                style={{ width: 100, height: 100 }}
+              />
+            </div>
+          )}
           <VerifyContainer>
             <Button
               variant="contained"
@@ -85,17 +100,25 @@ export const VaccinationCheck = ({
             >
               Scan
             </Button>
-            <Profile profile={profile} role="viewer" title="Detail" />
+            <div
+              style={{
+                margin: 15,
+              }}
+            >
+              <Profile profile={profile} role="viewer" title="Detail" />
+            </div>
           </VerifyContainer>
         </>
       ) : (
-        <QRContainer>
-          <ScanQRCode
-            onScanned={handleScanQrCode}
-            size={{ width: 600, height: 600 }}
-          />
-        </QRContainer>
+        loaded && (
+          <QRContainer>
+            <ScanQRCode
+              onScanned={handleScanQrCode}
+              size={{ width: 600, height: 600 }}
+            />
+          </QRContainer>
+        )
       )}
-    </div>
+    </Container>
   );
 };
