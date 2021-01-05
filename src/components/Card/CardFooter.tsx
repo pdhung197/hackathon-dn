@@ -8,7 +8,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
 
 // core components
-import cardFooterStyle from '../../assets/jss/material-dashboard-react/components/cardFooterStyle';
+import cardFooterStyle from '../../assets/jss/covid-vaccine-manager/components/cardFooterStyle';
 
 function CardFooter({ ...props }: any) {
   const {
@@ -27,7 +27,7 @@ function CardFooter({ ...props }: any) {
     [classes.cardFooterProfile]: profile,
     [classes.cardFooterStats]: stats,
     [classes.cardFooterChart]: chart,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   return (
     <div className={cardFooterClasses} {...rest}>

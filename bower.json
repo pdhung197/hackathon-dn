@@ -1,10 +1,8 @@
 {
-  "name": "material-dashboard-react",
-  "homepage": "https://github.com/creativetimofficial/material-dashboard-react",
-  "authors": [
-    "creative-tim"
-  ],
-  "description": "A Badass Material-UI Kit based on Material Design",
+  "name": "covid-vaccine-manager",
+  "homepage": "https://covidverify.xyz",
+  "authors": ["creative-tim"],
+  "description": "A Covid Vaccine Management Web App",
   "main": "public/index.html",
   "keywords": [
     "material",

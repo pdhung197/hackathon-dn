@@ -5,7 +5,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 // core components
-import footerStyle from '../../assets/jss/material-dashboard-react/components/footerStyle';
+import footerStyle from '../../assets/jss/covid-vaccine-manager/components/footerStyle';
 
 function Footer({ ...props }: any) {
   const { classes } = props;

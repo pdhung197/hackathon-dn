@@ -7,14 +7,14 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
 
 // core components
-import cardIconStyle from '../../assets/jss/material-dashboard-react/components/cardIconStyle';
+import cardIconStyle from '../../assets/jss/covid-vaccine-manager/components/cardIconStyle';
 
 function CardIcon({ ...props }: any) {
   const { classes, className, children, color, ...rest } = props;
   const cardIconClasses = classNames({
     [classes.cardIcon]: true,
     [classes[color + 'CardHeader']]: color,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   return (
     <div className={cardIconClasses} {...rest}>

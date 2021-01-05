@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons
 import Close from '@material-ui/icons/Close';
 // core components
-import snackbarContentStyle from '../../assets/jss/material-dashboard-react/components/snackbarContentStyle';
+import snackbarContentStyle from '../../assets/jss/covid-vaccine-manager/components/snackbarContentStyle';
 
 function Snackbar({ ...props }: any) {
   const {
@@ -19,11 +19,11 @@ function Snackbar({ ...props }: any) {
     icon,
     place,
     open,
-    rtlActive
+    rtlActive,
   } = props;
   let action: any[] = [];
   const messageClasses = classNames({
-    [classes.iconMessage]: icon !== undefined
+    [classes.iconMessage]: icon !== undefined,
   });
   if (close !== undefined) {
     action = [
@@ -36,7 +36,7 @@ function Snackbar({ ...props }: any) {
         onClick={() => props.closeNotification()}
       >
         <Close className={classes.close} />
-      </IconButton>
+      </IconButton>,
     ];
   }
   return (
@@ -47,8 +47,8 @@ function Snackbar({ ...props }: any) {
           place.indexOf('l') !== -1
             ? 'left'
             : place.indexOf('c') !== -1
-              ? 'center'
-              : 'right'
+            ? 'center'
+            : 'right',
       }}
       open={open}
       message={
@@ -62,8 +62,8 @@ function Snackbar({ ...props }: any) {
         classes: {
           root: classes.root + ' ' + classes[color],
           message: classes.message,
-          action: classNames({ [classes.actionRTL]: rtlActive })
-        }
+          action: classNames({ [classes.actionRTL]: rtlActive }),
+        },
       }}
     />
   );

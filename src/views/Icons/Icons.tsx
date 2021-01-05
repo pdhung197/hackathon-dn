@@ -10,7 +10,7 @@ import Card from '../../components/Card/Card';
 import CardHeader from '../../components/Card/CardHeader';
 import CardBody from '../../components/Card/CardBody';
 
-import iconsStyle from '../../assets/jss/material-dashboard-react/views/iconsStyle';
+import iconsStyle from '../../assets/jss/covid-vaccine-manager/views/iconsStyle';
 
 function Icons(props: any) {
   const { classes } = props;

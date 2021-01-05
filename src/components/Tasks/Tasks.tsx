@@ -14,7 +14,7 @@ import Edit from '@material-ui/icons/Edit';
 import Close from '@material-ui/icons/Close';
 import Check from '@material-ui/icons/Check';
 // core components
-import tasksStyle from '../../assets/jss/material-dashboard-react/components/tasksStyle';
+import tasksStyle from '../../assets/jss/covid-vaccine-manager/components/tasksStyle';
 
 interface Props {
   classes: any;
@@ -32,7 +32,7 @@ class Tasks extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      checked: this.props.checkedIndexes
+      checked: this.props.checkedIndexes,
     };
   }
 
@@ -48,14 +48,14 @@ class Tasks extends React.Component<Props, State> {
     }
 
     this.setState({
-      checked: newChecked
+      checked: newChecked,
     });
-  }
+  };
 
   render() {
     const { classes, tasksIndexes, tasks, rtlActive } = this.props;
     const tableCellClasses = classnames(classes.tableCell, {
-      [classes.tableCellRTL]: rtlActive
+      [classes.tableCellRTL]: rtlActive,
     });
     return (
       <Table className={classes.table}>
@@ -71,13 +71,11 @@ class Tasks extends React.Component<Props, State> {
                   icon={<Check className={classes.uncheckedIcon} />}
                   classes={{
                     checked: classes.checked,
-                    root: classes.root
+                    root: classes.root,
                   }}
                 />
               </TableCell>
-              <TableCell className={tableCellClasses}>
-                {tasks[value]}
-              </TableCell>
+              <TableCell className={tableCellClasses}>{tasks[value]}</TableCell>
               <TableCell className={classes.tableActions}>
                 <Tooltip
                   id="tooltip-top"

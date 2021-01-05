@@ -8,7 +8,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
 // core components
 
-import cardAvatarStyle from '../../assets/jss/material-dashboard-react/components/cardAvatarStyle';
+import cardAvatarStyle from '../../assets/jss/covid-vaccine-manager/components/cardAvatarStyle';
 
 function CardAvatar({ ...props }: any) {
   const { classes, children, className, plain, profile, ...rest } = props;
@@ -16,7 +16,7 @@ function CardAvatar({ ...props }: any) {
     [classes.cardAvatar]: true,
     [classes.cardAvatarProfile]: profile,
     [classes.cardAvatarPlain]: plain,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   return (
     <div className={cardAvatarClasses} {...rest}>

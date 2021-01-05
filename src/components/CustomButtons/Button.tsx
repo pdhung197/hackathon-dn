@@ -1,9 +1,9 @@
-import React from 'react'
-import classNames from 'classnames'
-import withStyles from '@material-ui/core/styles/withStyles'
-import Button from '@material-ui/core/Button'
+import React from 'react';
+import classNames from 'classnames';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Button from '@material-ui/core/Button';
 
-import buttonStyle from '../../assets/jss/material-dashboard-react/components/buttonStyle'
+import buttonStyle from '../../assets/jss/covid-vaccine-manager/components/buttonStyle';
 
 function RegularButton({ ...props }: any) {
   const {
@@ -20,7 +20,7 @@ function RegularButton({ ...props }: any) {
     className,
     muiClasses,
     ...rest
-  } = props
+  } = props;
   const btnClasses = classNames({
     [classes.button]: true,
     [classes[size]]: size,
@@ -32,12 +32,12 @@ function RegularButton({ ...props }: any) {
     [classes.link]: link,
     [classes.justIcon]: justIcon,
     [className]: className,
-  })
+  });
   return (
     <Button {...rest} classes={muiClasses} className={btnClasses}>
       {children}
     </Button>
-  )
+  );
 }
 
-export default withStyles(buttonStyle)(RegularButton)
+export default withStyles(buttonStyle)(RegularButton);

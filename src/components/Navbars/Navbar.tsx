@@ -14,7 +14,7 @@ import AdminNavbarLinks from './AdminNavbarLinks';
 import RTLNavbarLinks from './RTLNavbarLinks';
 import Button from '../CustomButtons/Button';
 
-import headerStyle from '../../assets/jss/material-dashboard-react/components/headerStyle';
+import headerStyle from '../../assets/jss/covid-vaccine-manager/components/headerStyle';
 
 function Header({ ...props }: any) {
   function makeBrand() {
@@ -29,7 +29,7 @@ function Header({ ...props }: any) {
   }
   const { classes, color } = props;
   const appBarClasses = classNames({
-    [' ' + classes[color]]: color
+    [' ' + classes[color]]: color,
   });
   return (
     <AppBar className={classes.appBar + appBarClasses}>

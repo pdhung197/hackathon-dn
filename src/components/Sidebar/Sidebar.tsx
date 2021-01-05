@@ -14,7 +14,7 @@ import Icon from '@material-ui/core/Icon';
 import AdminNavbarLinks from '../Navbars/AdminNavbarLinks';
 import RTLNavbarLinks from '../Navbars/RTLNavbarLinks';
 
-import sidebarStyle from '../../assets/jss/material-dashboard-react/components/sidebarStyle';
+import sidebarStyle from '../../assets/jss/covid-vaccine-manager/components/sidebarStyle';
 
 const Sidebar = ({ ...props }) => {
   // verifies if routeName is the one active (in browser input)

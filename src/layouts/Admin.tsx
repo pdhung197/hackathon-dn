@@ -7,7 +7,7 @@ import Sidebar from '../components/Sidebar/Sidebar';
 
 import routes from '../routes';
 
-import dashboardStyle from '../assets/jss/material-dashboard-react/layouts/dashboardStyle';
+import dashboardStyle from '../assets/jss/covid-vaccine-manager/layouts/dashboardStyle';
 import logo from 'assets/img/reactlogo.png';
 import image from 'assets/img/sidebar-2.png';
 

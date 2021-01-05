@@ -31,7 +31,7 @@ class FixedPlugin extends Component<Props, State> {
     this.state = {
       classes: 'dropdown show',
       bg_checked: true,
-      bgImage: this.props.bgImage
+      bgImage: this.props.bgImage,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -42,7 +42,7 @@ class FixedPlugin extends Component<Props, State> {
     return (
       <div
         className={classnames('fixed-plugin', {
-          'rtl-fixed-plugin': this.props.rtlActive
+          'rtl-fixed-plugin': this.props.rtlActive,
         })}
       >
         <div id="fixedPluginClasses" className={this.props.fixedClasses}>
@@ -162,7 +162,7 @@ class FixedPlugin extends Component<Props, State> {
               <div className="button-container">
                 <Button
                   color="success"
-                  href="https://www.creative-tim.com/product/material-dashboard-react"
+                  href="/"
                   target="_blank"
                   fullWidth={true}
                 >
@@ -183,12 +183,7 @@ class FixedPlugin extends Component<Props, State> {
               </div>
             </li>
             <li className="button-container">
-              <Button
-                color="info"
-                fullWidth={true}
-                href="https://demos.creative-tim.com/material-dashboard-react/#/documentation/tutorial"
-                target="_blank"
-              >
+              <Button color="info" fullWidth={true} href="/" target="_blank">
                 Documentation
               </Button>
             </li>

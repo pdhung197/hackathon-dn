@@ -1,5 +1,5 @@
 {
-  "name": "material-dashboard-react",
+  "name": "covid-vaccine-manager",
   "version": "1.6.0",
   "description": "Covid Vaccine Manager",
   "private": false,
@@ -75,15 +75,15 @@
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "lint:check": "eslint . --ext=js,jsx;  exit 0",
     "lint:fix": "eslint . --ext=js,jsx --fix;  exit 0",
-    "build-package-css": "cp src/assets/css/material-dashboard-react.css dist/material-dashboard-react.css",
+    "build-package-css": "cp src/assets/css/covid-vaccine-manager.css dist/covid-vaccine-manager.css",
     "build-package": "npm run build-package-css && babel src --out-dir dist"
   },
   "keywords": [],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/creativetimofficial/material-dashboard-react/issues"
+    "url": "https://github.com/pdhung197/hackathon-dn/issues"
   },
-  "homepage": "https://creativetimofficial.github.io/material-dashboard-react/#/dashboard",
+  "homepage": "https://covidverify.xyz",
   "optionalDependencies": {
     "@types/googlemaps": "3.39.1",
     "@types/markerclustererplus": "2.1.33",

@@ -8,13 +8,13 @@ import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons
 import Close from '@material-ui/icons/Close';
 // core components
-import snackbarContentStyle from '../../assets/jss/material-dashboard-react/components/snackbarContentStyle';
+import snackbarContentStyle from '../../assets/jss/covid-vaccine-manager/components/snackbarContentStyle';
 
 function SnackbarContent({ ...props }: any) {
   const { classes, message, color, close, icon, rtlActive } = props;
   let action: any[] = [];
   const messageClasses = classNames({
-    [classes.iconMessage]: icon !== undefined
+    [classes.iconMessage]: icon !== undefined,
   });
   if (close !== undefined) {
     action = [
@@ -26,7 +26,7 @@ function SnackbarContent({ ...props }: any) {
         color="inherit"
       >
         <Close className={classes.close} />
-      </IconButton>
+      </IconButton>,
     ];
   }
   return (
@@ -40,7 +40,7 @@ function SnackbarContent({ ...props }: any) {
       classes={{
         root: classes.root + ' ' + classes[color],
         message: classes.message,
-        action: classNames({ [classes.actionRTL]: rtlActive })
+        action: classNames({ [classes.actionRTL]: rtlActive }),
       }}
       action={action}
     />

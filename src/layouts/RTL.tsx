@@ -14,7 +14,7 @@ import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 
 import routes from '../routes';
 
-import rtlStyle from '../assets/jss/material-dashboard-react/layouts/rtlStyle';
+import rtlStyle from '../assets/jss/covid-vaccine-manager/layouts/rtlStyle';
 
 import image from 'assets/img/sidebar-2.jpg';
 import logo from 'assets/img/reactlogo.png';
@@ -57,17 +57,17 @@ class RTL extends React.Component<Props, State> {
       color: 'blue',
       hasImage: true,
       fixedClasses: 'dropdown ',
-      mobileOpen: false
+      mobileOpen: false,
     };
   }
 
   handleImageClick = (i: string) => {
     this.setState({ image: i });
-  }
+  };
 
   handleColorClick = (c: string) => {
     this.setState({ color: c });
-  }
+  };
 
   handleFixedClick = () => {
     if (this.state.fixedClasses === 'dropdown') {
@@ -75,11 +75,11 @@ class RTL extends React.Component<Props, State> {
     } else {
       this.setState({ fixedClasses: 'dropdown' });
     }
-  }
+  };
 
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
-  }
+  };
 
   getRoute() {
     return this.props.location.pathname !== '/admin/maps';
@@ -89,7 +89,7 @@ class RTL extends React.Component<Props, State> {
     if (window.innerWidth >= 960) {
       this.setState({ mobileOpen: false });
     }
-  }
+  };
 
   componentDidMount() {
     if (navigator.platform.indexOf('Win') > -1) {

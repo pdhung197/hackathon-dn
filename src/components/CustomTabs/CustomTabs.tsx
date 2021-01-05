@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // nodejs library to set properties for components
 
 // material-ui components
-import withStyles from "@material-ui/core/styles/withStyles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import withStyles from '@material-ui/core/styles/withStyles';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 // core components
-import Card from "../../components/Card/Card";
-import CardBody from "../../components/Card/CardBody";
-import CardHeader from "../../components/Card/CardHeader";
+import Card from '../../components/Card/Card';
+import CardBody from '../../components/Card/CardBody';
+import CardHeader from '../../components/Card/CardHeader';
 
-import customTabsStyle from "../../assets/jss/material-dashboard-react/components/customTabsStyle";
+import customTabsStyle from '../../assets/jss/covid-vaccine-manager/components/customTabsStyle';
 
 interface Props {
   classes: any;
@@ -31,7 +31,7 @@ class CustomTabs extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      value: 0
+      value: 0,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -47,11 +47,11 @@ class CustomTabs extends React.Component<Props, State> {
       plainTabs,
       tabs,
       title,
-      rtlActive
+      rtlActive,
     } = this.props;
     const cardTitle = classNames({
       [classes.cardTitle]: true,
-      [classes.cardTitleRTL]: rtlActive
+      [classes.cardTitleRTL]: rtlActive,
     });
     return (
       <Card plain={plainTabs}>
@@ -65,7 +65,7 @@ class CustomTabs extends React.Component<Props, State> {
             classes={{
               root: classes.tabsRoot,
               indicator: classes.displayNone,
-              scrollButtons: classes.displayNone
+              scrollButtons: classes.displayNone,
             }}
             variant="scrollable"
             scrollButtons="auto"
@@ -74,7 +74,7 @@ class CustomTabs extends React.Component<Props, State> {
               var icon = {};
               if (prop.tabIcon) {
                 icon = {
-                  icon: <prop.tabIcon />
+                  icon: <prop.tabIcon />,
                 };
               }
               return (

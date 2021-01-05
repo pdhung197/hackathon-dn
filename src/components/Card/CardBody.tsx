@@ -8,7 +8,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
 
 // core components
-import cardBodyStyle from '../../assets/jss/material-dashboard-react/components/cardBodyStyle';
+import cardBodyStyle from '../../assets/jss/covid-vaccine-manager/components/cardBodyStyle';
 
 function CardBody({ ...props }: any) {
   const { classes, className, children, plain, profile, ...rest } = props;
@@ -16,7 +16,7 @@ function CardBody({ ...props }: any) {
     [classes.cardBody]: true,
     [classes.cardBodyPlain]: plain,
     [classes.cardBodyProfile]: profile,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   return (
     <div className={cardBodyClasses} {...rest}>

@@ -7,7 +7,7 @@ import Admin from './layouts/Admin';
 import Login from './layouts/Login';
 import Register from './layouts/Register';
 
-import 'assets/css/material-dashboard-react.css?v=1.8.0';
+import 'assets/css/covid-vaccine-manager.css?v=1.8.0';
 
 import { Proof } from './views/Proof/Proof';
 import restClient from './services/rest-client';

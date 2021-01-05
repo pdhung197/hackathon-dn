@@ -18,23 +18,22 @@ import Search from '@material-ui/icons/Search';
 import CustomInput from '../CustomInput/CustomInput';
 import Button from '../CustomButtons/Button';
 
-import headerLinksStyle from '../../assets/jss/material-dashboard-react/components/headerLinksStyle';
+import headerLinksStyle from '../../assets/jss/covid-vaccine-manager/components/headerLinksStyle';
 
 interface Props {
   classes: any;
 }
 
 class HeaderLinks extends React.Component<Props, {}> {
-
   anchorEl: any;
 
   state = {
-    open: false
+    open: false,
   };
 
   handleToggle = () => {
     this.setState({ open: !this.state.open });
-  }
+  };
 
   handleClose = (event: any) => {
     if (this.anchorEl.contains(event.target)) {
@@ -42,7 +41,7 @@ class HeaderLinks extends React.Component<Props, {}> {
     }
 
     this.setState({ open: false });
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -52,13 +51,13 @@ class HeaderLinks extends React.Component<Props, {}> {
         <div className={classes.searchWrapper}>
           <CustomInput
             formControlProps={{
-              className: classes.margin + ' ' + classes.search
+              className: classes.margin + ' ' + classes.search,
             }}
             inputProps={{
               placeholder: 'Search',
               inputProps: {
-                'aria-label': 'Search'
-              }
+                'aria-label': 'Search',
+              },
             }}
           />
           <Button color="white" aria-label="edit" justIcon={true} round={true}>
@@ -93,8 +92,8 @@ class HeaderLinks extends React.Component<Props, {}> {
             <Notifications className={classes.icons} />
             <span className={classes.notifications}>5</span>
             <Hidden mdUp={true} implementation="css">
-              <p  className={classes.linkText}> 
-              {/* onClick={this.handleClick} */}
+              <p className={classes.linkText}>
+                {/* onClick={this.handleClick} */}
                 Notification
               </p>
             </Hidden>
@@ -116,7 +115,7 @@ class HeaderLinks extends React.Component<Props, {}> {
                 // id="menu-list-grow"
                 style={{
                   transformOrigin:
-                    placement === 'bottom' ? 'center top' : 'center bottom'
+                    placement === 'bottom' ? 'center top' : 'center bottom',
                 }}
               >
                 <Paper>
