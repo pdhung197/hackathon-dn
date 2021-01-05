@@ -62,16 +62,24 @@ const Login = (): ReactElement => {
   };
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container={true} component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item={true} xs={false} sm={4} md={7} className={classes.image} />
+      <Grid
+        item={true}
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square={true}
+      >
         <div className={classes.paper}>
           <img src={logoOwt} alt="owt" />
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate={true}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -87,8 +95,8 @@ const Login = (): ReactElement => {
             <TextField
               variant="outlined"
               margin="normal"
-              required
-              fullWidth
+              required={true}
+              fullWidth={true}
               name="password"
               placeholder="Password"
               type="password"
@@ -99,7 +107,7 @@ const Login = (): ReactElement => {
             />
             <p className={classes.error}>{error}</p>
             <Button
-              fullWidth
+              fullWidth={true}
               variant="contained"
               color="primary"
               onClick={e => handleForm(e)}

@@ -1,40 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import QrReader from 'react-qr-reader';
 
-export const ScanQRCode = () => {
-  let [result, setResult] = useState(null);
+type ScanQRCodeProps = {
+  onScanned?: (result: string) => void;
+  size?: {
+    width: number;
+    height: number;
+  };
+};
 
-  function handleScan(data: any){
-    console.log(data);
+export const ScanQRCode = ({ onScanned, size }: ScanQRCodeProps) => {
+  let [result, setResult] = useState<string>((null as unknown) as string);
+
+  function handleScan(data: any) {
     if (data) {
-      setResult(data)
+      setResult(data);
     }
   }
 
-  function handleError(err: any){
-    console.error(err)
+  function handleError(err: any) {
+    console.error(err);
   }
 
   const previewStyle = {
-    height: 240,
-    width: 320,
-  }
-  const delay = 300;
+    height: size?.height || 300,
+    width: size?.width || 300,
+  };
+
+  const delay = 200;
+
+  useEffect(() => {
+    if (result && onScanned) {
+      console.log({ result });
+      onScanned(result);
+    }
+  }, [onScanned, result]);
 
   return (
-    <div>
-      <h3>Scan QR Code</h3>
-      <div>
-        <QrReader
-          delay={delay}
-          onError={handleError}
-          onScan={handleScan}
-          style={previewStyle}
-        />
-      </div>
-      <div >{result}</div>
-    </div>
-  
+    <QrReader
+      delay={delay}
+      onError={handleError}
+      onScan={handleScan}
+      style={previewStyle}
+    />
   );
-
 };
