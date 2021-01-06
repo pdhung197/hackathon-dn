@@ -12,7 +12,7 @@ import { AuthContext } from '../index';
 import { useHistory, withRouter } from 'react-router-dom';
 import restClient from '../services/rest-client';
 import { get } from 'lodash';
-import bgImage from '../assets/img/login-bg.jpg';
+import bgImage from '../assets/img/bg.jpg';
 import logoOwt from '../assets/img/owt-logo.svg';
 
 function Copyright() {

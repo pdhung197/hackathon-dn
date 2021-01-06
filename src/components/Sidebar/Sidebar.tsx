@@ -115,6 +115,7 @@ const Sidebar = ({ ...props }) => {
           <div className={classes.sidebarWrapper}>
             {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
             {links}
+            asdfdagfdgdg dsfg fds g ds gd gdsf gdsf gd fds s s gf sd
           </div>
           {image !== undefined ? (
             <div

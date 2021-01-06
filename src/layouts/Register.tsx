@@ -1,19 +1,17 @@
-import React, { useState, ReactElement } from 'react'
-import Avatar from '@material-ui/core/Avatar'
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '@material-ui/core/TextField'
-import Link from '@material-ui/core/Link'
-import Paper from '@material-ui/core/Paper'
-import Box from '@material-ui/core/Box'
-import Grid from '@material-ui/core/Grid'
-import DirectionsBusIcon from '@material-ui/icons/DirectionsBus'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
+import React, { useState, ReactElement } from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import DirectionsBusIcon from '@material-ui/icons/DirectionsBus';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { withRouter } from 'react-router-dom'
-
-import firebase from '../firebase'
+import { withRouter } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -25,7 +23,7 @@ function Copyright() {
       {new Date().getFullYear()}
       {'.'}
     </Typography>
-  )
+  );
 }
 
 const useStyles = makeStyles(theme => ({
@@ -59,10 +57,10 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}))
+}));
 
 const Register = ({ history }: any): ReactElement => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   const initialState = {
     firstName: '',
@@ -72,36 +70,32 @@ const Register = ({ history }: any): ReactElement => {
     password: '',
     passwordConfirmation: '',
     errors: '',
-  }
+  };
 
-  const [state, setState] = useState(initialState)
+  const [state, setState] = useState(initialState);
 
   const handleInputChange = (event: any): void => {
-    const { name, value } = event.target
-    setState({ ...state, [name]: value })
-  }
+    const { name, value } = event.target;
+    setState({ ...state, [name]: value });
+  };
 
   const handleForm = (e: any): void => {
-    e.preventDefault()
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(state.emailAddress, state.password)
-      .then(res => {
-        if (res.user) {
-          history.replace('login')
-        }
-      })
-      .catch(e => {
-        console.log(e)
-        setState({ ...state, errors: e.message })
-      })
-  }
+    e.preventDefault();
+  };
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container={true} component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item={true} xs={false} sm={4} md={7} className={classes.image} />
+      <Grid
+        item={true}
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square={true}
+      >
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <DirectionsBusIcon />
@@ -110,62 +104,62 @@ const Register = ({ history }: any): ReactElement => {
             Sign up
           </Typography>
 
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate={true}>
             <TextField
               variant="outlined"
               margin="normal"
-              required
-              fullWidth
+              required={true}
+              fullWidth={true}
               id="emailAddress"
               label="Email Address"
               name="emailAddress"
               autoComplete="emailAddress"
               type="email"
-              autoFocus
+              autoFocus={true}
               value={state.emailAddress}
               onChange={handleInputChange}
             />
             <TextField
               variant="outlined"
               margin="normal"
-              fullWidth
+              fullWidth={true}
               label="First Name"
               id="firstName"
               name="firstName"
               autoComplete="firstName"
-              autoFocus
+              autoFocus={true}
               value={state.firstName}
               onChange={handleInputChange}
             />
             <TextField
               variant="outlined"
               margin="normal"
-              fullWidth
+              fullWidth={true}
               label="Last Name"
               id="lastName"
               name="lastName"
               autoComplete="lastName"
-              autoFocus
+              autoFocus={true}
               value={state.lastName}
               onChange={handleInputChange}
             />
             <TextField
               variant="outlined"
               margin="normal"
-              fullWidth
+              fullWidth={true}
               label="username"
               id="username"
               name="username"
               autoComplete="username"
-              autoFocus
+              autoFocus={true}
               value={state.username}
               onChange={handleInputChange}
             />
             <TextField
               variant="outlined"
               margin="normal"
-              required
-              fullWidth
+              required={true}
+              fullWidth={true}
               name="password"
               label="Password"
               type="password"
@@ -177,8 +171,8 @@ const Register = ({ history }: any): ReactElement => {
             <TextField
               variant="outlined"
               margin="normal"
-              required
-              fullWidth
+              required={true}
+              fullWidth={true}
               name="passwordConfirmation"
               label="Password confirmation"
               type="password"
@@ -188,7 +182,7 @@ const Register = ({ history }: any): ReactElement => {
               onChange={handleInputChange}
             />
             <Button
-              fullWidth
+              fullWidth={true}
               variant="contained"
               color="primary"
               disabled={
@@ -204,9 +198,9 @@ const Register = ({ history }: any): ReactElement => {
 
             {state.errors}
 
-            <Grid container>
-              <Grid item xs></Grid>
-              <Grid item>
+            <Grid container={true}>
+              <Grid item={true} xs={true}></Grid>
+              <Grid item={true}>
                 <Link href="/login" variant="body2">
                   {'Do you already have an account? Sign In'}
                 </Link>
@@ -219,7 +213,7 @@ const Register = ({ history }: any): ReactElement => {
         </div>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default withRouter(Register)
+export default withRouter(Register);
