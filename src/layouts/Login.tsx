@@ -33,8 +33,8 @@ const Login = (): ReactElement => {
   const history = useHistory();
   const Auth = useContext(AuthContext);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('admin');
+  const [password, setPassword] = useState('huu123');
   const [error, setError] = useState('');
 
   const handleForm = (e: any): void => {
